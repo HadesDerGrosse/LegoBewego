@@ -15,7 +15,7 @@ public class VectorField : MonoBehaviour {
     // store the current extents of the vectorfield
     private Vector2 vectorfieldOrigin;
     private Vector2 vectorfieldOffset;
-    private int grow = 0;
+    private int grow = 3;
 
     // size of array 
     private int vfX = 0;
@@ -74,7 +74,7 @@ public class VectorField : MonoBehaviour {
 
         RaycastCameraFrustum();
 
-        Vector2 newOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.z));
+        Vector2 newOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x - grow), Mathf.Floor(cornerBounds.min.z - grow));
 
         // if the origin has moved the array needs to be moved as well
         // this is done by discarding entries that are not needed anymore
