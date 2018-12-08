@@ -8,6 +8,6 @@ PhysicMaterial:
   m_Name: Stone Physic Material
   dynamicFriction: 0.1
   staticFriction: 0.1
-  bounciness: 0.9
+  bounciness: 0.5
   frictionCombine: 0
   bounceCombine: 0

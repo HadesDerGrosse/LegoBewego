@@ -92,10 +92,10 @@ public class WorldManager : MonoBehaviour {
         currentBorderTiles.Add(tileUp);
         currentBorderTiles.Add(tileDown);
 
-        tileDown.transform.position = new Vector3(lastBorderTilePos, 0.0f, -levelHeight / 2.0f);
-        tileUp.transform.position = new Vector3(lastBorderTilePos, 0.0f, levelHeight / 2.0f);
-        tileUp.transform.rotation = Quaternion.Euler(180, 0, 0);
-        tileDown.transform.rotation = Quaternion.Euler(0, 0, 0);
+        tileDown.transform.position = new Vector3(lastBorderTilePos, -1.0f, -levelHeight / 2.0f);
+        tileUp.transform.position = new Vector3(lastBorderTilePos, -1.0f, levelHeight / 2.0f);
+        tileUp.transform.rotation = Quaternion.Euler(0, 0, 0);
+        tileDown.transform.rotation = Quaternion.Euler(0, 180, 0);
 
         lastBorderTilePos += tileHight;
     }

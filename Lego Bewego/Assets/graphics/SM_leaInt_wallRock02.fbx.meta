@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: 60da29bc018fc4041aa179aff7638626
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SM_leaInt_wallRock02
+    100004: SM_leaInt_wallRock02_helpr
+    100006: SM_leaInt_wallRock02_low
+    100008: SOCKET_socket_009.001
+    100010: SOCKET_socket_009.002
+    100012: SOCKET_socket_009.003
+    100014: SOCKET_socket_009.004
+    100016: SOCKET_socket_009.005
+    100018: wallRock01_collider_001
+    100020: wallRock01_collider_002
+    100022: wallRock01_collider_003
+    100024: wallRock01_collider_004
+    100026: wallRock01_collider_005
+    100028: wallRock01_collider_006
+    100030: wallRock01_collider_007
+    100032: wallRock01_collider_008
+    100034: wallRock01_collider_009
+    100036: wallRock01_collider_010
+    100038: wallRock01_collider_011
+    100040: wallRock01_collider_012
+    100042: wallRock01_collider_013
+    100044: wallRock01_collider_014
+    400000: SM_leaInt_wallRock02
+    400002: //RootNode
+    400004: SM_leaInt_wallRock02_helpr
+    400006: SM_leaInt_wallRock02_low
+    400008: SOCKET_socket_009.001
+    400010: SOCKET_socket_009.002
+    400012: SOCKET_socket_009.003
+    400014: SOCKET_socket_009.004
+    400016: SOCKET_socket_009.005
+    400018: wallRock01_collider_001
+    400020: wallRock01_collider_002
+    400022: wallRock01_collider_003
+    400024: wallRock01_collider_004
+    400026: wallRock01_collider_005
+    400028: wallRock01_collider_006
+    400030: wallRock01_collider_007
+    400032: wallRock01_collider_008
+    400034: wallRock01_collider_009
+    400036: wallRock01_collider_010
+    400038: wallRock01_collider_011
+    400040: wallRock01_collider_012
+    400042: wallRock01_collider_013
+    400044: wallRock01_collider_014
+    2100000: No Name
+    2100002: MI_leaInt_wallRock
+    2300000: SM_leaInt_wallRock02
+    2300002: wallRock01_collider_001
+    2300004: wallRock01_collider_002
+    2300006: wallRock01_collider_003
+    2300008: wallRock01_collider_004
+    2300010: wallRock01_collider_005
+    2300012: wallRock01_collider_006
+    2300014: wallRock01_collider_007
+    2300016: wallRock01_collider_008
+    2300018: wallRock01_collider_009
+    2300020: wallRock01_collider_010
+    2300022: wallRock01_collider_011
+    2300024: wallRock01_collider_012
+    2300026: wallRock01_collider_013
+    2300028: wallRock01_collider_014
+    3300000: SM_leaInt_wallRock02
+    3300002: wallRock01_collider_001
+    3300004: wallRock01_collider_002
+    3300006: wallRock01_collider_003
+    3300008: wallRock01_collider_004
+    3300010: wallRock01_collider_005
+    3300012: wallRock01_collider_006
+    3300014: wallRock01_collider_007
+    3300016: wallRock01_collider_008
+    3300018: wallRock01_collider_009
+    3300020: wallRock01_collider_010
+    3300022: wallRock01_collider_011
+    3300024: wallRock01_collider_012
+    3300026: wallRock01_collider_013
+    3300028: wallRock01_collider_014
+    4300000: wallRock01_collider_001
+    4300002: wallRock01_collider_002
+    4300004: wallRock01_collider_003
+    4300006: wallRock01_collider_004
+    4300008: wallRock01_collider_005
+    4300010: wallRock01_collider_006
+    4300012: wallRock01_collider_007
+    4300014: wallRock01_collider_008
+    4300016: wallRock01_collider_009
+    4300018: wallRock01_collider_010
+    4300020: wallRock01_collider_011
+    4300022: wallRock01_collider_012
+    4300024: wallRock01_collider_013
+    4300026: wallRock01_collider_014
+    4300028: SM_leaInt_wallRock02
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

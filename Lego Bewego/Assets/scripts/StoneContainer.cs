@@ -29,8 +29,7 @@ public class StoneContainer : MonoBehaviour {
     {
         if(!children.Contains(collision.transform) && collision.gameObject.tag == "stone")
         {
-            int damage = Convert.ToInt32(collision.relativeVelocity.magnitude);
-            Debug.Log(damage);
+            int damage = Convert.ToInt32(collision.relativeVelocity.magnitude*GameManager.getInstance().damageMultiply);
             currentHealth -= damage;
 
             if (currentHealth <= 0)
