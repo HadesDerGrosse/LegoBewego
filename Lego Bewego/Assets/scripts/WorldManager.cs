@@ -4,27 +4,57 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
 
+    private static WorldManager instance; 
+
+    public List<GameObject> islandTiles;
+    public List<GameObject> currentIslandTiles;
+    private GameObjectPool islandPool;
 
     public List<GameObject> borderTiles;
-    public List<GameObject> currentTiles;
-    public List<GameObject> pool;
+    private List<GameObject> currentBorderTiles;
+    private GameObjectPool borderPool;
 
     public int levelHeight = 50;
-    private int lastTilePos = 0;
+    public float islandAngle = 20;
+    private int lastBorderTilePos = 0;
+    private int lastIslandTilePos = 0;
     public int tileHight = 10;
     public int visibleDistance = 2;
 
     private float currentPos;
-    
 
+    public static WorldManager getInstance()
+    {
+        return instance;
+    }
+
+    void Awake()
+    {
+        currentBorderTiles = new List<GameObject>();
+        borderPool = new GameObjectPool(borderTiles, this.gameObject,10);
+        islandPool = new GameObjectPool(islandTiles, this.gameObject,10);
+        
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+    
 	// Use this for initialization
 	void Start () {
-        lastTilePos = -visibleDistance;
+        lastBorderTilePos = -visibleDistance;
+        lastIslandTilePos = visibleDistance;
 
-        while (lastTilePos < visibleDistance)
+        while (lastBorderTilePos < visibleDistance)
         {
-            addTileToWorld();
+            addBorderTileToWorld();
         }
+
+        for(int i = 0; i<3; i++)
+        {
+            addIslandToWorld();
+        }
+        
 		
 	}
 	
@@ -32,62 +62,58 @@ public class WorldManager : MonoBehaviour {
 	void Update () {
         currentPos = Camera.main.transform.position.x;
 
-        if (currentPos - currentTiles[0].transform.position.x > visibleDistance)
+        if (currentPos - currentBorderTiles[0].transform.position.x > visibleDistance)
         {
-            addTileToWorld();
-            removeTileFromWorld();            
+            addBorderTileToWorld();
+            removeBorderTileFromWorld();            
+        }
+
+        if (currentPos - currentIslandTiles[0].transform.position.x > visibleDistance)
+        {
+            addIslandToWorld();
+            removeIslandFromWorld();
         }
 
     }
 
-    private void removeTileFromWorld()
+    private void removeBorderTileFromWorld()
     {
-        addTileToPool(currentTiles[0]);
-        addTileToPool(currentTiles[1]);
-        currentTiles.RemoveAt(0);
-        currentTiles.RemoveAt(0);
+        borderPool.add(currentBorderTiles[0]);
+        borderPool.add(currentBorderTiles[1]);
+        currentBorderTiles.RemoveAt(0);
+        currentBorderTiles.RemoveAt(0);
     }
 
-    private void addTileToWorld()
+    private void addBorderTileToWorld()
     {
-        GameObject tileUp = getTileFromPool();
-        GameObject tileDown = getTileFromPool();
+        GameObject tileUp = borderPool.get();
+        GameObject tileDown = borderPool.get();
 
-        currentTiles.Add(tileUp);
-        currentTiles.Add(tileDown);
+        currentBorderTiles.Add(tileUp);
+        currentBorderTiles.Add(tileDown);
 
-        tileDown.transform.position = new Vector3(lastTilePos, 0.0f, -levelHeight / 2.0f);
-        tileUp.transform.position = new Vector3(lastTilePos, 0.0f, levelHeight / 2.0f);
+        tileDown.transform.position = new Vector3(lastBorderTilePos, 0.0f, -levelHeight / 2.0f);
+        tileUp.transform.position = new Vector3(lastBorderTilePos, 0.0f, levelHeight / 2.0f);
         tileUp.transform.rotation = Quaternion.Euler(180, 0, 0);
         tileDown.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        lastTilePos += tileHight;
+        lastBorderTilePos += tileHight;
     }
 
-    public GameObject getTileFromPool()
+    private void addIslandToWorld()
     {
-        GameObject go = null;
+        GameObject go = islandPool.get();
+        Island island = go.GetComponent<Island>();
+        go.transform.position = new Vector3(UnityEngine.Random.Range(lastIslandTilePos, lastIslandTilePos + visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-10 - island.dimensions.z) / 2, (levelHeight-10 - island.dimensions.z) / 2));
+        go.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(-islandAngle, islandAngle), 0);
+        currentIslandTiles.Add(go);
+        lastIslandTilePos += visibleDistance;
 
-        if (pool.Count > 0)
-        {
-            int index = UnityEngine.Random.Range(0, pool.Count);
-            go = pool[index];            
-            pool.RemoveAt(index);            
-        } 
-        
-        else
-        {
-            go = Instantiate(borderTiles[UnityEngine.Random.Range(0, borderTiles.Count)]);
-            go.transform.parent = this.transform;
-        }
-
-        go.SetActive(true);
-        return go;
     }
 
-    public void addTileToPool(GameObject go)
+    private void removeIslandFromWorld()
     {
-        pool.Add(go);
-        go.SetActive(false);
+        islandPool.add(currentIslandTiles[0]);
+        currentIslandTiles.RemoveAt(0);
     }
 }
