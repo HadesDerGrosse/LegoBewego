@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: 04400d2cdcaf1684b8f25eb945852e45
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: SM_leaInt_islandSmall03
+    100002: //RootNode
+    100004: SM_leaInt_islandSmall03_helpr
+    100006: SM_leaInt_islandSmall03_low
+    100008: SOCKET_socket_009.011
+    100010: SOCKET_socket_009.012
+    100012: SOCKET_socket_009.013
+    100014: SOCKET_socket_009.014
+    100016: SOCKET_socket_009.020
+    100018: SOECKET_mine_017
+    100020: SOECKET_mine_018
+    100022: SOECKET_mine_019
+    100024: SOECKET_mine_020
+    100026: SOECKET_mine_021
+    100028: SOECKET_mine_022
+    100030: SOECKET_mine_023
+    100032: SOECKET_mine_024
+    100034: UBX_SM_leaInt_islandSmall03_00
+    100036: UBX_SM_leaInt_islandSmall03_01
+    100038: UBX_SM_leaInt_islandSmall03_02
+    100040: UBX_SM_leaInt_islandSmall03_03
+    100042: UBX_SM_leaInt_islandSmall03_04
+    100044: UBX_SM_leaInt_islandSmall03_05
+    100046: UBX_SM_leaInt_islandSmall03_06
+    100048: UBX_SM_leaInt_islandSmall03_07
+    100050: UBX_SM_leaInt_islandSmall03_08
+    100052: UBX_SM_leaInt_islandSmall03_09
+    100054: UBX_SM_leaInt_islandSmall03_10
+    100056: UBX_SM_leaInt_islandSmall03_11
+    100058: UBX_SM_leaInt_islandSmall03_12
+    400000: SM_leaInt_islandSmall03
+    400002: //RootNode
+    400004: SM_leaInt_islandSmall03_helpr
+    400006: SM_leaInt_islandSmall03_low
+    400008: SOCKET_socket_009.011
+    400010: SOCKET_socket_009.012
+    400012: SOCKET_socket_009.013
+    400014: SOCKET_socket_009.014
+    400016: SOCKET_socket_009.020
+    400018: SOECKET_mine_017
+    400020: SOECKET_mine_018
+    400022: SOECKET_mine_019
+    400024: SOECKET_mine_020
+    400026: SOECKET_mine_021
+    400028: SOECKET_mine_022
+    400030: SOECKET_mine_023
+    400032: SOECKET_mine_024
+    400034: UBX_SM_leaInt_islandSmall03_00
+    400036: UBX_SM_leaInt_islandSmall03_01
+    400038: UBX_SM_leaInt_islandSmall03_02
+    400040: UBX_SM_leaInt_islandSmall03_03
+    400042: UBX_SM_leaInt_islandSmall03_04
+    400044: UBX_SM_leaInt_islandSmall03_05
+    400046: UBX_SM_leaInt_islandSmall03_06
+    400048: UBX_SM_leaInt_islandSmall03_07
+    400050: UBX_SM_leaInt_islandSmall03_08
+    400052: UBX_SM_leaInt_islandSmall03_09
+    400054: UBX_SM_leaInt_islandSmall03_10
+    400056: UBX_SM_leaInt_islandSmall03_11
+    400058: UBX_SM_leaInt_islandSmall03_12
+    2100000: No Name
+    2100002: MI_leaInt_islandSmall02
+    2100004: MI_leaInt_islandSmall03
+    2300000: SM_leaInt_islandSmall03
+    2300002: UBX_SM_leaInt_islandSmall03_00
+    2300004: UBX_SM_leaInt_islandSmall03_01
+    2300006: UBX_SM_leaInt_islandSmall03_02
+    2300008: UBX_SM_leaInt_islandSmall03_03
+    2300010: UBX_SM_leaInt_islandSmall03_04
+    2300012: UBX_SM_leaInt_islandSmall03_05
+    2300014: UBX_SM_leaInt_islandSmall03_06
+    2300016: UBX_SM_leaInt_islandSmall03_07
+    2300018: UBX_SM_leaInt_islandSmall03_08
+    2300020: UBX_SM_leaInt_islandSmall03_09
+    2300022: UBX_SM_leaInt_islandSmall03_10
+    2300024: UBX_SM_leaInt_islandSmall03_11
+    2300026: UBX_SM_leaInt_islandSmall03_12
+    3300000: SM_leaInt_islandSmall03
+    3300002: UBX_SM_leaInt_islandSmall03_00
+    3300004: UBX_SM_leaInt_islandSmall03_01
+    3300006: UBX_SM_leaInt_islandSmall03_02
+    3300008: UBX_SM_leaInt_islandSmall03_03
+    3300010: UBX_SM_leaInt_islandSmall03_04
+    3300012: UBX_SM_leaInt_islandSmall03_05
+    3300014: UBX_SM_leaInt_islandSmall03_06
+    3300016: UBX_SM_leaInt_islandSmall03_07
+    3300018: UBX_SM_leaInt_islandSmall03_08
+    3300020: UBX_SM_leaInt_islandSmall03_09
+    3300022: UBX_SM_leaInt_islandSmall03_10
+    3300024: UBX_SM_leaInt_islandSmall03_11
+    3300026: UBX_SM_leaInt_islandSmall03_12
+    4300000: UBX_SM_leaInt_islandSmall03_12
+    4300002: UBX_SM_leaInt_islandSmall03_11
+    4300004: UBX_SM_leaInt_islandSmall03_10
+    4300006: UBX_SM_leaInt_islandSmall03_09
+    4300008: UBX_SM_leaInt_islandSmall03_08
+    4300010: UBX_SM_leaInt_islandSmall03_07
+    4300012: UBX_SM_leaInt_islandSmall03_06
+    4300014: UBX_SM_leaInt_islandSmall03_05
+    4300016: UBX_SM_leaInt_islandSmall03_04
+    4300018: UBX_SM_leaInt_islandSmall03_03
+    4300020: UBX_SM_leaInt_islandSmall03_02
+    4300022: UBX_SM_leaInt_islandSmall03_01
+    4300024: UBX_SM_leaInt_islandSmall03_00
+    4300026: SM_leaInt_islandSmall03
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

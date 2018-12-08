@@ -25,7 +25,7 @@ public class HeroStone : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        GameManager.getInstance().distanceTreveld = Mathf.Max(transform.position.x, GameManager.getInstance().distanceTreveld);
+        GameManager.getInstance().distanceTreveld = Mathf.Max(transform.position.x, GameManager.getInstance().distanceTreveld)*0.016f;
 		
 	}
 

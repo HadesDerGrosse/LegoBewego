@@ -104,8 +104,8 @@ public class WorldManager : MonoBehaviour {
     {
         GameObject go = islandPool.get();
         Island island = go.GetComponent<Island>();
-        go.transform.position = new Vector3(UnityEngine.Random.Range(lastIslandTilePos, lastIslandTilePos + visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-10 - island.dimensions.z) / 2, (levelHeight-10 - island.dimensions.z) / 2));
-        go.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(-islandAngle, islandAngle), 0);
+        go.transform.position = new Vector3(UnityEngine.Random.Range(lastIslandTilePos, lastIslandTilePos + visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
+        go.transform.rotation = Quaternion.Euler(-90, UnityEngine.Random.Range(-islandAngle, islandAngle), 180);
         currentIslandTiles.Add(go);
         lastIslandTilePos += visibleDistance;
 

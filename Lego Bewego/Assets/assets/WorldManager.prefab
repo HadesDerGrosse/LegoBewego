@@ -52,7 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   islandTiles:
-  - {fileID: 1681674874155832, guid: d547f3c054001c040b265e3dfe40a86f, type: 2}
+  - {fileID: 1567074174886152, guid: a4c16887a1760074cb91d4835afe13a1, type: 2}
+  - {fileID: 1754377324097722, guid: 8a1f0e345d418d84d81ba67b666111f5, type: 2}
+  - {fileID: 1764105493528296, guid: f3949f6c9eca2c446a33406039cdf273, type: 2}
   currentIslandTiles: []
   borderTiles:
   - {fileID: 1436200323842890, guid: b36213bc51f524d4b96ea8e797241b97, type: 2}
