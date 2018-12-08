@@ -186,6 +186,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114444813282781238, guid: babe27f7e688f5643a84de0b1d08329b,
+        type: 2}
+      propertyPath: mines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4309036115351878, guid: babe27f7e688f5643a84de0b1d08329b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -221,8 +226,26 @@ Prefab:
     - target: {fileID: 114444813282781238, guid: babe27f7e688f5643a84de0b1d08329b,
         type: 2}
       propertyPath: levelHeight
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 114444813282781238, guid: babe27f7e688f5643a84de0b1d08329b,
+        type: 2}
+      propertyPath: mines.Array.data[0]
+      value: 
+      objectReference: {fileID: 1337649341543842, guid: d6dff56967b64a74da1c960614e0e132,
+        type: 2}
+    - target: {fileID: 114444813282781238, guid: babe27f7e688f5643a84de0b1d08329b,
+        type: 2}
+      propertyPath: mines.Array.data[1]
+      value: 
+      objectReference: {fileID: 1099308225838148, guid: 2d2eb83e22df3bf4fb82b0dfc3aa06f9,
+        type: 2}
+    - target: {fileID: 114444813282781238, guid: babe27f7e688f5643a84de0b1d08329b,
+        type: 2}
+      propertyPath: mines.Array.data[2]
+      value: 
+      objectReference: {fileID: 1295130351737364, guid: d2d2c744672de6f4fa76b2d9c32f1f31,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: babe27f7e688f5643a84de0b1d08329b, type: 2}
   m_IsPrefabAsset: 0
@@ -549,6 +572,11 @@ Prefab:
         type: 2}
       propertyPath: m_BackGroundColor.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114582842184771104, guid: 2efc0ec048919564092e9d3dd8f1ed44,
+        type: 2}
+      propertyPath: maxZ
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2efc0ec048919564092e9d3dd8f1ed44, type: 2}

@@ -32,8 +32,9 @@ public class Island : MonoBehaviour {
         {
             if (UnityEngine.Random.Range(0.0f, 1.0f) < minePossibility)
             {
-                GameObject go = Instantiate(mine[UnityEngine.Random.Range(0, mine.Count)]);
+                GameObject go = WorldManager.minePool.get();
                 go.transform.position = t.position;
+
             }
 
         }

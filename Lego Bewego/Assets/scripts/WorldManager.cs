@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
 
-    private static WorldManager instance; 
+    private static WorldManager instance;
+
+    public List<GameObject> mines;
+    public static GameObjectPool minePool;
 
     public List<GameObject> islandTiles;
     public List<GameObject> currentIslandTiles;
@@ -33,6 +36,7 @@ public class WorldManager : MonoBehaviour {
         currentBorderTiles = new List<GameObject>();
         borderPool = new GameObjectPool(borderTiles, this.gameObject,10);
         islandPool = new GameObjectPool(islandTiles, this.gameObject,10);
+        minePool = new GameObjectPool(mines, this.gameObject, 20);
         
         if(instance == null)
         {

@@ -26,20 +26,22 @@ public class DeathTrap : MonoBehaviour {
             VectorField.instance.removeParticle(collision.rigidbody);
             collision.rigidbody.constraints = RigidbodyConstraints.None;
             Destroy(collision.gameObject,5);
-        }
-        GameObject go = Instantiate(explosion);
-        go.transform.position = transform.position;
-        Destroy(go, 5);
 
-        foreach(Collider c in Physics.OverlapSphere(transform.position, range))
-        {
-            if (c.GetComponent<Rigidbody>() != null)
+            GameObject go = Instantiate(explosion);
+            go.transform.position = transform.position;
+            Destroy(go, 5);
+
+            foreach (Collider c in Physics.OverlapSphere(transform.position, range))
             {
-                c.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, range);
-                Debug.Log(c.transform.name);
+                if (c.GetComponent<Rigidbody>() != null)
+                {
+                    c.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, range);
+                    Debug.Log(c.transform.name);
+                }
             }
-        }
 
-        Destroy(this.gameObject);
+            WorldManager.minePool.add(this.gameObject);
+        }
+        
     }
 }
