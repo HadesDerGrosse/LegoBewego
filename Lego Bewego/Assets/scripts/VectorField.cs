@@ -15,6 +15,7 @@ public class VectorField : MonoBehaviour {
     // store the current extents of the vectorfield
     private Vector2 vectorfieldOrigin;
     private Vector2 vectorfieldOffset;
+    private int grow = 0;
 
     // size of array 
     private int vfX = 0;
@@ -54,8 +55,8 @@ public class VectorField : MonoBehaviour {
 
         RaycastCameraFrustum();
 
-        vectorfieldOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.z));
-        Vector2 vectorfieldMax = new Vector2(Mathf.Ceil(cornerBounds.max.x), Mathf.Ceil(cornerBounds.max.z));
+        vectorfieldOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x - grow), Mathf.Floor(cornerBounds.min.z - grow));
+        Vector2 vectorfieldMax = new Vector2(Mathf.Ceil(cornerBounds.max.x + grow), Mathf.Ceil(cornerBounds.max.z + grow));
 
 
         // create array with the correct amount of indizes
@@ -137,27 +138,20 @@ public class VectorField : MonoBehaviour {
                 float x = vectorfield[i, j].vel.x;
                 float y = vectorfield[i, j].vel.y;
 
-                if (false) // i <= 0 || i >= vfX-1 || j <= 0 || j >= vfY-1
-                {
-                    vectorfield[i, j].vel = vectorfield[i, j].vel * 0.95f;
-                }
-                else
-                {
-                    VectorfieldFraction frac = vectorfield[i, j];
-                    float vx = frac.vel.x;
-                    float vy = frac.vel.y;
+                VectorfieldFraction frac = vectorfield[i, j];
+                float vx = frac.vel.x;
+                float vy = frac.vel.y;
 
-                    float px = vectorfield[WrapIndex(i -1 , vfX), j].vel.x - vectorfield[WrapIndex(i + 1, vfX), j].vel.x;
-                    float py = vectorfield[i, WrapIndex(j - 1, vfY)].vel.y - vectorfield[i, WrapIndex(j + 1, vfY)].vel.y;
-                    frac.pressure = (px + py) * 0.5f;
+                float px = vectorfield[WrapIndex(i -1 , vfX), j].vel.x - vectorfield[WrapIndex(i + 1, vfX), j].vel.x;
+                float py = vectorfield[i, WrapIndex(j - 1, vfY)].vel.y - vectorfield[i, WrapIndex(j + 1, vfY)].vel.y;
+                frac.pressure = (px + py) * 0.5f;
 
-                    vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
-                    vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
+                vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
+                vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
 
-                    vx *= 0.98f;
-                    vy *= 0.98f;
-                    frac.vel.Set(vx, vy);
-                }
+                vx *= 0.98f;
+                vy *= 0.98f;
+                frac.vel.Set(vx, vy);
 
             }
         }
@@ -362,6 +356,11 @@ public class VectorField : MonoBehaviour {
                 vectorfield[i, j] = new VectorfieldFraction();
             }
         }
+    }
+
+    public Vector3[] getCameraFloorFrustum()
+    {
+        return corners;
     }
 
 }
