@@ -4,43 +4,68 @@ using UnityEngine;
 
 public class VectorField : MonoBehaviour {
 
-    private Vector2[][] vectorfield = null;
+    private Vector2[,] vectorfield = null;
+    // store the current extents of the vectorfield
+    private Vector2 vectorfieldOrigin;
+
+
     private float fieldSize = 1;
+
+    // plane wo which the frustums of the camera are projected against
     private Plane ground;
 
     // BL, BR, TL, TR
     // screenCorners holds coordinates in screenSpace
     private Vector3[] screenCorners;
     private Vector3[] corners;
+    private Bounds cornerBounds;
+
 
 
     // Use this for initialization
     void Start () {
         ground = new Plane(Vector3.up, Vector3.zero);
         corners = new Vector3[4];
-        screenCorners = new Vector3[]{ new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 0, 0), new Vector3(1, 1, 0) };
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        // check how much the camera sees
-        // ray cast from camera space to plane in ground axis
-        for(int i = 0; i< screenCorners.Length; i++)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(screenCorners[i]);
-        
-            float enter = 0f;
+        screenCorners = new Vector3[]{
+            new Vector3(0, 0, 0),
+            new Vector3(Camera.main.pixelWidth, 0, 0),
+            new Vector3(0, Camera.main.pixelHeight, 0),
+            new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0) };
 
-            if(ground.Raycast(ray,out enter))
+        RaycastCameraFrustum();
+
+        Vector2 vectorfieldOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.y));
+        Vector2 vectorfieldMax = new Vector2(Mathf.Ceil(cornerBounds.max.x), Mathf.Ceil(cornerBounds.max.y));
+
+
+        // create array with the correct amount of indizes
+        vectorfield = new Vector2[(int)(vectorfieldMax.x - vectorfieldOrigin.x), (int)(vectorfieldMax.y - vectorfieldOrigin.y)];
+        for(int i=0; i<vectorfield.GetLength(0); i++)
+        {
+            for (int j = 0; j < vectorfield.GetLength(1); j++)
             {
-                corners[i] = ray.GetPoint(enter);
-                print(i);
-                print(corners[i]);
+                vectorfield[i, j] = new Vector2(i, j);
             }
         }
 
     }
 
+
+
+    // Update is called once per frame
+    void Update () {
+
+        RaycastCameraFrustum();
+
+        // now that corners of camera have been determined
+        // fill up bounding box with vectorfields
+
+
+
+    }
+
+
+    // DEBUG
     void OnDrawGizmos()
     {
         if (Application.isPlaying && DebugManager.instance.debugVectorField)
@@ -49,10 +74,44 @@ public class VectorField : MonoBehaviour {
             for(int i=0; i< corners.Length; i++)
             {
                 Gizmos.DrawSphere(corners[i], 0.5f);
+                Gizmos.DrawWireCube(cornerBounds.center, cornerBounds.size);
+            }
+
+            foreach(Vector2 field in vectorfield)
+            {
+                Gizmos.DrawWireCube(new Vector3(field.x, field.y), new Vector3(0.5f,0.5f,0.1f));
             }
         }
     }
+
+
+    // Utility
+    private void RaycastCameraFrustum()
+    {
+        // check how much the camera sees
+        // ray cast from camera space to plane in ground axis
+        for (int i = 0; i < screenCorners.Length; i++)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenCorners[i]);
+
+            float enter = 0f;
+
+            if (ground.Raycast(ray, out enter))
+            {
+                corners[i] = ray.GetPoint(enter);
+            }
+        }
+
+        // create a bounding box from the camera frustums
+        cornerBounds = new Bounds(corners[0], Vector3.zero);
+        for (int i = 1; i < corners.Length; i++)
+        {
+            cornerBounds.Encapsulate(corners[i]);
+        }
+    }
+
 }
+
 
 
 /* Code Reference
