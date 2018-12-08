@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class VectorField : MonoBehaviour {
 
-    private Vector2[,] vectorfield = null;
+    private Vector3[,] vectorfield;
     // store the current extents of the vectorfield
     private Vector2 vectorfieldOrigin;
+    private Vector2 vectorfieldOffset;
 
+    // size of array 
+    private int vX = 0;
+    private int vY = 0;
 
     private float fieldSize = 1;
 
@@ -26,25 +30,30 @@ public class VectorField : MonoBehaviour {
     void Start () {
         ground = new Plane(Vector3.up, Vector3.zero);
         corners = new Vector3[4];
+        vectorfieldOffset = new Vector2(0,0);
         screenCorners = new Vector3[]{
             new Vector3(0, 0, 0),
             new Vector3(Camera.main.pixelWidth, 0, 0),
             new Vector3(0, Camera.main.pixelHeight, 0),
             new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0) };
 
+
+
         RaycastCameraFrustum();
 
-        Vector2 vectorfieldOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.y));
-        Vector2 vectorfieldMax = new Vector2(Mathf.Ceil(cornerBounds.max.x), Mathf.Ceil(cornerBounds.max.y));
+        vectorfieldOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.z));
+        Vector2 vectorfieldMax = new Vector2(Mathf.Ceil(cornerBounds.max.x), Mathf.Ceil(cornerBounds.max.z));
 
 
         // create array with the correct amount of indizes
-        vectorfield = new Vector2[(int)(vectorfieldMax.x - vectorfieldOrigin.x), (int)(vectorfieldMax.y - vectorfieldOrigin.y)];
+        vX = (int)(vectorfieldMax.x - vectorfieldOrigin.x);
+        vY = (int)(vectorfieldMax.y - vectorfieldOrigin.y);
+        vectorfield = new Vector3[vX, vY];
         for(int i=0; i<vectorfield.GetLength(0); i++)
         {
-            for (int j = 0; j < vectorfield.GetLength(1); j++)
+            for (int j = 0; j < vY; j++)
             {
-                vectorfield[i, j] = new Vector2(i, j);
+                vectorfield[i, j] = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f));
             }
         }
 
@@ -57,10 +66,71 @@ public class VectorField : MonoBehaviour {
 
         RaycastCameraFrustum();
 
-        // now that corners of camera have been determined
-        // fill up bounding box with vectorfields
+        Vector2 newOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x), Mathf.Floor(cornerBounds.min.z));
+
+        // if the origin has moved the array needs to be moved as well
+        // this is done by discarding entries that are not needed anymore
+
+        if (newOrigin.x > vectorfieldOrigin.x + vectorfieldOffset.x)
+        {
+            // raise Offset
+            vectorfieldOffset.Set(vectorfieldOffset.x+1, vectorfieldOffset.y);
+
+            // clear fields
+            for (int i = 0; i < vY; i++)
+            {
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1) % vX)) % vX, i] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            }
+        }
+
+        if (newOrigin.x < vectorfieldOrigin.x + vectorfieldOffset.x)
+        {
+            // reduce Offset
+            vectorfieldOffset.Set(vectorfieldOffset.x - 1, vectorfieldOffset.y);
+
+            // clear fields
+            for (int i = 0; i < vectorfield.GetLength(1); i++)
+            {
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1)%vX)) % vX, i] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            }
+        }
+
+        if (newOrigin.y > vectorfieldOrigin.y + vectorfieldOffset.y)
+        {
+            //raise Offset
+            vectorfieldOffset.Set(vectorfieldOffset.x, vectorfieldOffset.y+1);
+
+            // clear fields
+            for (int i = 0; i < vX; i++)
+            {
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            }
+        }
+
+        if (newOrigin.y < vectorfieldOrigin.y + vectorfieldOffset.y)
+        {
+            //raise Origin
+            vectorfieldOffset.Set(vectorfieldOffset.x, vectorfieldOffset.y - 1);
+
+            // clear fields
+            for (int i = 0; i < vX; i++)
+            {
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            }
+        }
 
 
+        if (Input.GetMouseButtonDown(0) && DebugManager.instance.debugVectorField)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            float enter = 0f;
+
+            if (ground.Raycast(ray, out enter))
+            {
+                Vector3 pos = ray.GetPoint(enter);
+            }
+        }
 
     }
 
@@ -77,12 +147,28 @@ public class VectorField : MonoBehaviour {
                 Gizmos.DrawWireCube(cornerBounds.center, cornerBounds.size);
             }
 
-            foreach(Vector2 field in vectorfield)
+            for (int i = 0; i < vX; i++)
             {
-                Gizmos.DrawWireCube(new Vector3(field.x, field.y), new Vector3(0.5f,0.5f,0.1f));
+                for (int j = 0; j < vY; j++)
+                {
+                    Vector2 shift = new Vector2(
+                        Mathf.Floor((vX+vectorfieldOffset.x-i) / vX), 
+                        Mathf.Floor((vY+vectorfieldOffset.y-j) / vY));
+
+                    Vector3 start = new Vector3(
+                        i + shift.x*vX + vectorfieldOrigin.x,
+                        0,
+                        j + shift.y*vY + vectorfieldOrigin.y);
+
+                    Gizmos.DrawWireCube(start, new Vector3(1, 0.01f, 1));
+                    Debug.DrawLine(start, start + vectorfield[i, j]);
+                }
             }
         }
     }
+
+
+
 
 
     // Utility
@@ -110,8 +196,21 @@ public class VectorField : MonoBehaviour {
         }
     }
 
-}
 
+
+
+
+    public Vector3 getForce(Vector3 position)
+    {
+        Vector2 fieldPosition = new Vector2(position.x, position.z) - vectorfieldOrigin;
+        return vectorfield[
+            (int)(Mathf.Round(fieldPosition.x -1) % vX), 
+            (int)(Mathf.Round(fieldPosition.y -1) % vY)
+            ];
+    }
+
+
+}
 
 
 /* Code Reference
