@@ -5,16 +5,53 @@ using UnityEngine;
 public class VectorField : MonoBehaviour {
 
     private Vector2[][] vectorfield = null;
+    private float fieldSize = 1;
+    private Plane ground;
 
-	// Use this for initialization
-	void Start () {
-		// check how much the camera sees
-	}
+    // BL, BR, TL, TR
+    // screenCorners holds coordinates in screenSpace
+    private Vector3[] screenCorners;
+    private Vector3[] corners;
+
+
+    // Use this for initialization
+    void Start () {
+        ground = new Plane(Vector3.up, Vector3.zero);
+        corners = new Vector3[4];
+        screenCorners = new Vector3[]{ new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 0, 0), new Vector3(1, 1, 0) };
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        // check how much the camera sees
+        // ray cast from camera space to plane in ground axis
+        for(int i = 0; i< screenCorners.Length; i++)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenCorners[i]);
+        
+            float enter = 0f;
+
+            if(ground.Raycast(ray,out enter))
+            {
+                corners[i] = ray.GetPoint(enter);
+                print(i);
+                print(corners[i]);
+            }
+        }
+
+    }
+
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying && DebugManager.instance.debugVectorField)
+        {
+            //draw screen edge points
+            for(int i=0; i< corners.Length; i++)
+            {
+                Gizmos.DrawSphere(corners[i], 0.5f);
+            }
+        }
+    }
 }
 
 
