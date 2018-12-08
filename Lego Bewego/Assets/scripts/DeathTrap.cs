@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeathTrap : MonoBehaviour {
 
+    public GameObject explosion;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,7 +20,12 @@ public class DeathTrap : MonoBehaviour {
     {
         if (collision.gameObject.tag == "stone")
         {
+            VectorField.instance.removeParticle(collision.rigidbody);
             Destroy(collision.gameObject);
         }
+        GameObject go = Instantiate(explosion);
+        go.transform.position = transform.position;
+        Destroy(go, 5);
+        Destroy(this.gameObject);
     }
 }

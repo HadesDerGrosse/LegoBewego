@@ -139,6 +139,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4158691633203454}
   - component: {fileID: 114717340390235862}
+  - component: {fileID: 114879170939905320}
+  - component: {fileID: 114258749526112462}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -522,6 +524,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114258749526112462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520846496277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0775fb9de19222043aa4a217c0332fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugVectorField: 0
 --- !u!114 &114425904080582886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -740,6 +754,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114879170939905320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520846496277734}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b6aee1a1fa13b4ba48ceb5d54b0e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: []
+  forceFactor: 50
 --- !u!114 &114915555727482666
 MonoBehaviour:
   m_ObjectHideFlags: 1

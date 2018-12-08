@@ -46,22 +46,28 @@ public class GameManager : MonoBehaviour {
 
     public void startGame()
     {
+
         gameIsRunning = true;
+        VectorField.instance.enabled = true;
+        VectorField.instance.clearParticles();
+        VectorField.instance.addParticle(HeroStone.getInstance().GetComponent<Rigidbody>());        
         currentScoreCanvas.gameObject.SetActive(true);
         startGameCanvas.gameObject.SetActive(false);
     }
 
     public void endGame()
     {
+        VectorField.instance.enabled = false;
         gameIsRunning = false;
         gameEndCanvas.gameObject.SetActive(true);
         currentScoreCanvas.gameObject.SetActive(false);
         endTimeTextField.text = distanceTreveld.ToString("0.00") + "m";
     }
 
-    public void startLevel()
-    {
+    public void startLevel()    {
+               
         startGameCanvas.gameObject.SetActive(true);
+        gameEndCanvas.gameObject.SetActive(false);
         distanceTreveld = 0;
         Application.LoadLevel(index: 1);
     }

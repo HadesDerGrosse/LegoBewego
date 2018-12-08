@@ -47,6 +47,7 @@ public class StoneContainer : MonoBehaviour {
             {
                 Rigidbody rig = child.gameObject.AddComponent<Rigidbody>();
                 rig.constraints = RigidbodyConstraints.FreezePositionY;
+                VectorField.instance.addParticle(rig);
                 child.parent = this.transform.parent;
             }            
         }

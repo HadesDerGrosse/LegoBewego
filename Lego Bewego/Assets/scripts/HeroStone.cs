@@ -31,6 +31,7 @@ public class HeroStone : MonoBehaviour {
 
     void OnDestroy()
     {
+        VectorField.instance.removeParticle(GetComponent<Rigidbody>());
         GameManager.getInstance().endGame();
     }
 }
