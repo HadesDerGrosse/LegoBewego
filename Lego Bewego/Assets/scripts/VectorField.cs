@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class VectorField : MonoBehaviour {
 
-    private Vector3[,] vectorfield;
+    public static VectorField instance;
+
+    public List<Rigidbody> particles;
+
+    public float forceFactor = 50;
+
+
+    private Vector2[,] vectorfield;
     // store the current extents of the vectorfield
     private Vector2 vectorfieldOrigin;
     private Vector2 vectorfieldOffset;
@@ -26,8 +33,16 @@ public class VectorField : MonoBehaviour {
 
 
 
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
+
+
     // Use this for initialization
     void Start () {
+        
         ground = new Plane(Vector3.up, Vector3.zero);
         corners = new Vector3[4];
         vectorfieldOffset = new Vector2(0,0);
@@ -48,12 +63,13 @@ public class VectorField : MonoBehaviour {
         // create array with the correct amount of indizes
         vX = (int)(vectorfieldMax.x - vectorfieldOrigin.x);
         vY = (int)(vectorfieldMax.y - vectorfieldOrigin.y);
-        vectorfield = new Vector3[vX, vY];
-        for(int i=0; i<vectorfield.GetLength(0); i++)
+        vectorfield = new Vector2[vX, vY];
+
+        for(int i=0; i<vX; i++)
         {
             for (int j = 0; j < vY; j++)
             {
-                vectorfield[i, j] = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f));
+                vectorfield[i, j] = new Vector2(Random.Range(-1f,1f), Random.Range(-1f, 1f));
             }
         }
 
@@ -79,7 +95,7 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vY; i++)
             {
-                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1) % vX)) % vX, i] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1) % vX)) % vX, i] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             }
         }
 
@@ -91,33 +107,78 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vectorfield.GetLength(1); i++)
             {
-                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1)%vX)) % vX, i] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1)%vX)) % vX, i] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             }
         }
 
         if (newOrigin.y > vectorfieldOrigin.y + vectorfieldOffset.y)
         {
-            //raise Offset
+            // raise Offset
             vectorfieldOffset.Set(vectorfieldOffset.x, vectorfieldOffset.y+1);
 
             // clear fields
             for (int i = 0; i < vX; i++)
             {
-                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             }
         }
 
         if (newOrigin.y < vectorfieldOrigin.y + vectorfieldOffset.y)
         {
-            //raise Origin
+            // raise Origin
             vectorfieldOffset.Set(vectorfieldOffset.x, vectorfieldOffset.y - 1);
 
             // clear fields
             for (int i = 0; i < vX; i++)
             {
-                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             }
         }
+
+
+        // force propagation
+        /*for all cells (x,y) {
+      vx(x,y) += ( p(x-1,y  ) - p(x+1,y  ) )*0.5;
+      vy(x,y) += ( p(x  ,y-1) - p(x  ,y+1) )*0.5;
+
+      if ( frictionTurnedOn ) {
+         vx(x,y) *= 0.99;
+         vy(x,y) *= 0.99;
+      }
+   }
+         * 
+         */
+        for (int i = 0; i < vX; i++)
+        {
+            for (int j = 0; j < vY; j++)
+            {
+                // damp
+                /*
+                vectorfield[i, j].Set(
+                    vectorfield[i, j].x * 0.98f, 
+                    vectorfield[i, j].y * 0.98f
+                    );
+                 * */
+
+                // diffuse
+                /*
+                    */
+                vectorfield[i, j].Set(
+                    (float)(vectorfield[i, j].x + ((vectorfield[Mathf.Max(i - 1, 0), j].x - vectorfield[Mathf.Min(i + 1,vX), j].x) * 0.5) * 0.95),
+                    (float)(vectorfield[i, j].y + ((vectorfield[i, Mathf.Max(j - 1, 0)].y - vectorfield[i, Mathf.Min(j + 1, vY)].y) * 0.5) * 0.95)
+                    );
+
+            }
+        }
+
+
+        // add force to particles
+        foreach(Rigidbody particle in particles)
+        {
+            particle.AddForce(forceFactor * getForce(particle.GetComponent<Transform>().position));
+        }
+
+
 
 
         if (Input.GetMouseButtonDown(0) && DebugManager.instance.debugVectorField)
@@ -161,7 +222,7 @@ public class VectorField : MonoBehaviour {
                         j + shift.y*vY + vectorfieldOrigin.y);
 
                     Gizmos.DrawWireCube(start, new Vector3(1, 0.01f, 1));
-                    Debug.DrawLine(start, start + vectorfield[i, j]);
+                    Debug.DrawLine(start, start + new Vector3(vectorfield[i, j].x, 0, vectorfield[i, j].y));
                 }
             }
         }
@@ -199,16 +260,23 @@ public class VectorField : MonoBehaviour {
 
 
 
+    // IO
 
     public Vector3 getForce(Vector3 position)
     {
         Vector2 fieldPosition = new Vector2(position.x, position.z) - vectorfieldOrigin;
-        return vectorfield[
-            (int)(Mathf.Round(fieldPosition.x -1) % vX), 
-            (int)(Mathf.Round(fieldPosition.y -1) % vY)
-            ];
+        int x = (int)(Mathf.Round(fieldPosition.x - 1) % vX);
+        int y = (int)(Mathf.Round(fieldPosition.y - 1) % vY);
+        if (x < 0 || x > vX || y < 0 || y > vY) return new Vector3();
+        return new Vector3(vectorfield[x,y].y, 0, vectorfield[x, y].y);
     }
 
+
+
+    public void addParticle(Rigidbody rb)
+    {
+        particles.Add(rb);
+    }
 
 }
 
