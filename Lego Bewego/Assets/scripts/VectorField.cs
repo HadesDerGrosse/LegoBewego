@@ -154,19 +154,19 @@ public class VectorField : MonoBehaviour {
             {
                 // damp
                 /*
+                 * */
                 vectorfield[i, j].Set(
                     vectorfield[i, j].x * 0.98f, 
                     vectorfield[i, j].y * 0.98f
                     );
-                 * */
 
                 // diffuse
                 /*
-                    */
                 vectorfield[i, j].Set(
-                    (float)(vectorfield[i, j].x + ((vectorfield[Mathf.Max(i - 1, 0), j].x - vectorfield[Mathf.Min(i + 1,vX), j].x) * 0.5) * 0.95),
-                    (float)(vectorfield[i, j].y + ((vectorfield[i, Mathf.Max(j - 1, 0)].y - vectorfield[i, Mathf.Min(j + 1, vY)].y) * 0.5) * 0.95)
+                    (float) (vectorfield[i, j].x + ((vectorfield[Mathf.Max(i - 1, 0), j].x - vectorfield[Mathf.Min(i + 1,vX), j].x) * 0.5) * 0.95),
+                    (float) (vectorfield[i, j].y + ((vectorfield[i, Mathf.Max(j - 1, 0)].y - vectorfield[i, Mathf.Min(j + 1, vY)].y) * 0.5) * 0.95)
                     );
+                    */
 
             }
         }
@@ -257,6 +257,24 @@ public class VectorField : MonoBehaviour {
         }
     }
 
+    private int[] WorldPositionToArrayIndex(Vector3 position)
+    {
+        Vector2 fieldPosition = new Vector2(position.x, position.z) - vectorfieldOrigin;
+        int x = (int)(Mathf.Round(fieldPosition.x) % vX);
+        int y = (int)(Mathf.Round(fieldPosition.y) % vY);
+        if (x < 0 || x > vX || y < 0 || y > vY) throw new System.IndexOutOfRangeException();
+        return new int[] {Mathf.Clamp(x, 0, vX), Mathf.Clamp(y, 0, vY)};
+    }
+
+    private Vector2 Vec3ToVec2(Vector3 input)
+    {
+        return new Vector2(input.x, input.z);
+    }
+
+    private Vector3 Vec2ToVec3(Vector2 input)
+    {
+        return new Vector3(input.x, 0, input.y);
+    }
 
 
 
@@ -264,11 +282,46 @@ public class VectorField : MonoBehaviour {
 
     public Vector3 getForce(Vector3 position)
     {
-        Vector2 fieldPosition = new Vector2(position.x, position.z) - vectorfieldOrigin;
-        int x = (int)(Mathf.Round(fieldPosition.x - 1) % vX);
-        int y = (int)(Mathf.Round(fieldPosition.y - 1) % vY);
-        if (x < 0 || x > vX || y < 0 || y > vY) return new Vector3();
-        return new Vector3(vectorfield[x,y].y, 0, vectorfield[x, y].y);
+        int[] indizes;
+        try
+        {
+            indizes = WorldPositionToArrayIndex(position);
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            return new Vector3();
+        }
+        int x = indizes[0];
+        int y = indizes[1];
+        return Vec2ToVec3(vectorfield[x,y]);
+    }
+
+
+    // input pixel coordinates, raycast to ground and add force
+    public void addForce(Vector2 start, Vector2 end)
+    {
+        Ray startRay = Camera.main.ScreenPointToRay(start);
+        Ray endRay = Camera.main.ScreenPointToRay(end);
+
+        float startEnter = 0f;
+        float endEnter = 0f;
+
+        if (ground.Raycast(startRay, out startEnter) && ground.Raycast(endRay, out endEnter))
+        {
+            Vector3 startPos = startRay.GetPoint(startEnter);
+            Vector3 endPos = endRay.GetPoint(endEnter);
+            try
+            {
+                int[] index = WorldPositionToArrayIndex(startPos);
+                Vector2 force = Vec3ToVec2(endPos - startPos);
+                vectorfield[index[0], index[1]] = force;
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+                print("Index out of range in addForce of Vector Field");
+            }
+
+        }
     }
 
 
