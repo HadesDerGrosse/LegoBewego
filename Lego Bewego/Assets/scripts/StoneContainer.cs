@@ -8,15 +8,15 @@ public class StoneContainer : MonoBehaviour {
     public int startHealth = 5;
     public int currentHealth = 0;
     public float damageMulti = 1.0f;
-    public Transform[] children;
+    public List<Transform> children;
 
 	// Use this for initialization
 	void Start () {
         currentHealth = startHealth;
-        children = new Transform[transform.childCount];
+        children = new List<Transform>();
 
         for(int i = 0; i<transform.childCount; i++){
-            children[i] = transform.GetChild(i);
+            children.Add(transform.GetChild(i));
         }
 	}
 	
@@ -27,22 +27,31 @@ public class StoneContainer : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        
-        int damage = Convert.ToInt32(collision.relativeVelocity.magnitude);
-        Debug.Log(collision.relativeVelocity.magnitude);
-        currentHealth -= damage;
-
-        if(currentHealth <= 0)
+        if(!children.Contains(collision.transform) && collision.gameObject.tag == "stone")
         {
-            crush();
-        }       
+            int damage = Convert.ToInt32(collision.relativeVelocity.magnitude);
+            Debug.Log(damage);
+            currentHealth -= damage;
+
+            if (currentHealth <= 0)
+            {
+                crush();
+            }
+        }             
     }
 
     public void crush()
     {
         foreach(Transform child in children)
         {
-            child.parent = this.transform.parent;
+            if(child.GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody rig = child.gameObject.AddComponent<Rigidbody>();
+                rig.constraints = RigidbodyConstraints.FreezePositionY;
+                child.parent = this.transform.parent;
+            }            
         }
+
+        Destroy(this.gameObject);
     }
 }
