@@ -95,7 +95,7 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vY; i++)
             {
-                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1) % vX)) % vX, i] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1) % vX)) % vX, i] = new Vector2();
             }
         }
 
@@ -107,7 +107,7 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vectorfield.GetLength(1); i++)
             {
-                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1)%vX)) % vX, i] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                vectorfield[(int)(vX + ((vectorfieldOffset.x - 1)%vX)) % vX, i] = new Vector2();
             }
         }
 
@@ -119,7 +119,7 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vX; i++)
             {
-                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2();
             }
         }
 
@@ -131,7 +131,7 @@ public class VectorField : MonoBehaviour {
             // clear fields
             for (int i = 0; i < vX; i++)
             {
-                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                vectorfield[i, (int)(vY + ((vectorfieldOffset.y - 1) % vY)) % vY] = new Vector2();
             }
         }
 
@@ -162,12 +162,13 @@ public class VectorField : MonoBehaviour {
 
                 // diffuse
                 /*
-                vectorfield[i, j].Set(
-                    (float) (vectorfield[i, j].x + ((vectorfield[Mathf.Max(i - 1, 0), j].x - vectorfield[Mathf.Min(i + 1,vX), j].x) * 0.5) * 0.95),
-                    (float) (vectorfield[i, j].y + ((vectorfield[i, Mathf.Max(j - 1, 0)].y - vectorfield[i, Mathf.Min(j + 1, vY)].y) * 0.5) * 0.95)
+                float x = vectorfield[i, j].x;
+                float y = vectorfield[i, j].y;
+                vectorfield[i, j] = (
+                    (vectorfield[i, j] + )
                     );
-                    */
 
+                    */
             }
         }
 
@@ -329,6 +330,11 @@ public class VectorField : MonoBehaviour {
     public void addParticle(Rigidbody rb)
     {
         particles.Add(rb);
+    }
+
+    public void removeParticle(Rigidbody rb)
+    {
+        particles.Remove(rb);
     }
 
 }
