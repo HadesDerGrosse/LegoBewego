@@ -64,14 +64,7 @@ public class VectorField : MonoBehaviour {
         vfX = (int)(vectorfieldMax.x - vectorfieldOrigin.x);
         vfY = (int)(vectorfieldMax.y - vectorfieldOrigin.y);
         vectorfield = new VectorfieldFraction[vfX, vfY];
-
-        for(int i=0; i<vfX; i++)
-        {
-            for (int j = 0; j < vfY; j++)
-            {
-                vectorfield[i, j] = new VectorfieldFraction();
-            }
-        }
+        resetVectorfield();
 
     }
 
@@ -137,25 +130,6 @@ public class VectorField : MonoBehaviour {
 
 
         // force propagation
-
-        /*
-         * for all cells (x,y) {
-      px = vx(x-1,y  ) - vx(x+1,y  );
-      py = vy(x  ,y-1) - vy(x  ,y+1);
-      p(x,y) = (px+py)*0.5;
-   }
-
-         * for all cells (x,y) {
-      vx(x,y) += ( p(x-1,y  ) - p(x+1,y  ) )*0.5;
-      vy(x,y) += ( p(x  ,y-1) - p(x  ,y+1) )*0.5;
-
-      if ( frictionTurnedOn ) {
-         vx(x,y) *= 0.99;
-         vy(x,y) *= 0.99;
-      }
-   }
-         * 
-         */
         for (int i = 0; i < vfX; i++)
         {
             for (int j = 0; j < vfY; j++)
@@ -185,15 +159,6 @@ public class VectorField : MonoBehaviour {
                     vx *= 0.98f;
                     vy *= 0.98f;
                     frac.vel.Set(vx, vy);
-                    /*
-
-                        vectorfield[i, j] = 
-                            (vectorfield[i, j] + 
-                            (vectorfield[i-1, j] - vectorfield[i+1, j])*0.5f +
-                            (vectorfield[i, j-1] - vectorfield[i, j+1])*0.5f
-                            ) * 0.95f
-                            ;
-                        */
                 }
 
             }
@@ -277,11 +242,20 @@ public class VectorField : MonoBehaviour {
 
     private int[] WorldPositionToArrayIndex(Vector3 position)
     {
+        if (position.x < cornerBounds.min.x 
+            || position.x > cornerBounds.max.x
+            || position.z < cornerBounds.min.z
+            || position.z > cornerBounds.max.z)
+        {
+            throw new System.IndexOutOfRangeException("x: " + position.x + "  z: " + position.z);
+        }
+
         Vector2 fieldPosition = Vec3ToVec2(position) - vectorfieldOrigin;
-        int x = (int)(Mathf.Round(fieldPosition.x) % vfX);
-        int y = (int)(Mathf.Round(fieldPosition.y) % vfY);
-        if (x < 0 || x > vfX || y < 0 || y > vfY) throw new System.IndexOutOfRangeException();
-        return new int[] {Mathf.Clamp(x, 0, vfX), Mathf.Clamp(y, 0, vfY)};
+
+        int x = (int)(vfX + (Mathf.Round(fieldPosition.x) % vfX)) % vfX;
+        int y = (int)(vfY + (Mathf.Round(fieldPosition.y) % vfY)) % vfY;
+
+        return new int[] {x, y};
     }
 
 
@@ -315,8 +289,9 @@ public class VectorField : MonoBehaviour {
         {
             indizes = WorldPositionToArrayIndex(position);
         }
-        catch (System.IndexOutOfRangeException)
+        catch (System.IndexOutOfRangeException e)
         {
+            //print(e.Message);
             return new Vector3();
         }
         int x = indizes[0];
@@ -342,11 +317,17 @@ public class VectorField : MonoBehaviour {
             {
                 int[] index = WorldPositionToArrayIndex(startPos);
                 Vector2 force = Vec3ToVec2(endPos - startPos);
+                // core force
                 vectorfield[index[0], index[1]].vel = force;
+                // neighbour forces
+                if (index[0] - 1 > 0) vectorfield[index[0] - 1, index[1]].vel = force * 0.75f;
+                if (index[1] - 1 > 0) vectorfield[index[0], index[1] - 1].vel = force * 0.75f;
+                if (index[0] + 1 < vfX) vectorfield[index[0] + 1, index[1]].vel = force * 0.75f;
+                if (index[1] + 1 < vfY) vectorfield[index[0], index[1] + 1].vel = force * 0.75f;
             }
-            catch (System.IndexOutOfRangeException)
-            {
+            catch (System.IndexOutOfRangeException e) {
                 print("Index out of range in addForce of Vector Field");
+                print(e.Message);
             }
 
         }
@@ -367,6 +348,17 @@ public class VectorField : MonoBehaviour {
     public void clearParticles()
     {
         particles.Clear();
+    }
+
+    public void resetVectorfield()
+    {
+        for (int i = 0; i < vfX; i++)
+        {
+            for (int j = 0; j < vfY; j++)
+            {
+                vectorfield[i, j] = new VectorfieldFraction();
+            }
+        }
     }
 
 }
