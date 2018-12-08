@@ -165,10 +165,12 @@ public class VectorField : MonoBehaviour {
                 float x = vectorfield[i, j].x;
                 float y = vectorfield[i, j].y;
                 vectorfield[i, j] = (
-                    (vectorfield[i, j] + )
+                    (vectorfield[i, j] + 
+                    (vectorfield[i-1, j] - vectorfield[i+1, j])*0.5f) +
+                    (vectorfield[i, j-1] - vectorfield[i, j+1])*0.5f
                     );
-
                     */
+
             }
         }
 
@@ -335,6 +337,11 @@ public class VectorField : MonoBehaviour {
     public void removeParticle(Rigidbody rb)
     {
         particles.Remove(rb);
+    }
+
+    public void clearParticles()
+    {
+        particles.Clear();
     }
 
 }
