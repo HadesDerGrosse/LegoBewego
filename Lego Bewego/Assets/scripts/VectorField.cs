@@ -20,8 +20,6 @@ public class VectorField : MonoBehaviour {
     private int vfX = 0;
     private int vfY = 0;
 
-    private float fieldSize = 1;
-
     // plane wo which the frustums of the camera are projected against
     private Plane ground;
 
@@ -139,7 +137,7 @@ public class VectorField : MonoBehaviour {
                 float x = vectorfield[i, j].vel.x;
                 float y = vectorfield[i, j].vel.y;
 
-                if (i <= 0 || i >= vfX-1 || j <= 0 || j >= vfY-1)
+                if (false) // i <= 0 || i >= vfX-1 || j <= 0 || j >= vfY-1
                 {
                     vectorfield[i, j].vel = vectorfield[i, j].vel * 0.95f;
                 }
@@ -149,12 +147,12 @@ public class VectorField : MonoBehaviour {
                     float vx = frac.vel.x;
                     float vy = frac.vel.y;
 
-                    float px = vectorfield[i - 1, j].vel.x - vectorfield[i + 1, j].vel.x;
-                    float py = vectorfield[i, j - 1].vel.y - vectorfield[i, j + 1].vel.y;
+                    float px = vectorfield[WrapIndex(i -1 , vfX), j].vel.x - vectorfield[WrapIndex(i + 1, vfX), j].vel.x;
+                    float py = vectorfield[i, WrapIndex(j - 1, vfY)].vel.y - vectorfield[i, WrapIndex(j + 1, vfY)].vel.y;
                     frac.pressure = (px + py) * 0.5f;
 
-                    vx += (vectorfield[i - 1, j].pressure - vectorfield[i + 1, j].pressure) * 0.5f;
-                    vy += (vectorfield[i, j - 1].pressure - vectorfield[i, j + 1].pressure) * 0.5f;
+                    vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
+                    vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
 
                     vx *= 0.98f;
                     vy *= 0.98f;
@@ -256,6 +254,11 @@ public class VectorField : MonoBehaviour {
         int y = (int)(vfY + (Mathf.Round(fieldPosition.y) % vfY)) % vfY;
 
         return new int[] {x, y};
+    }
+
+    private int WrapIndex(int i, float max)
+    {
+        return (int)((max+(i%max))%max);
     }
 
 
