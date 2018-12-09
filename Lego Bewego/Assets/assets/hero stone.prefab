@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4568867681667702}
   m_Layer: 0
   m_Name: SM_leaChr_heroStone_helpr
-  m_TagString: Untagged
+  m_TagString: stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 64979227019931470}
   m_Layer: 0
   m_Name: UBX_SM_leaChr_heroStone_00
-  m_TagString: Untagged
+  m_TagString: stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4414832055276378}
   m_Layer: 0
   m_Name: SM_leaChr_heroStone (1)
-  m_TagString: Untagged
+  m_TagString: stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 4933413248653104}
   - component: {fileID: 33351868841513294}
   - component: {fileID: 54382009999350164}
-  - component: {fileID: 114401698401353734}
   - component: {fileID: 114987003308247794}
   m_Layer: 0
   m_Name: hero stone
@@ -105,7 +104,7 @@ GameObject:
   - component: {fileID: 4264939251670444}
   m_Layer: 0
   m_Name: SM_leaChr_heroStone_low
-  m_TagString: Untagged
+  m_TagString: stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,8 +143,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620348618771276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.339}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0.503}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4568867681667702}
   - {fileID: 4264939251670444}
@@ -298,7 +297,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 4
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &64979227019931470
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -313,17 +312,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: f123a36090cdb8448a44cf2318eb7489, type: 3}
---- !u!114 &114401698401353734
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721045810331446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3a2ea724e02c4e44bdad18ad4224b2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114987003308247794
 MonoBehaviour:
   m_ObjectHideFlags: 1
