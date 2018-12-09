@@ -136,55 +136,21 @@ public class VectorField : MonoBehaviour {
             }
         }
 
-        /*
-         * 
-         */
         // force propagation
+        // buffer
         for (int i = 0; i < vfX; i++)
         {
             for (int j = 0; j < vfY; j++)
             {
-
+                vectorfield[i,j].velBuffer = vectorfield[i, j].vel;
+            }
+        }
+        for (int i = 0; i < vfX; i++)
+        {
+            for (int j = 0; j < vfY; j++)
+            {
                 // diffuse
-                VectorfieldFraction frac = vectorfield[i, j];
-                frac.velBuffer = frac.vel;
-                float vx = frac.vel.x;
-                float vy = frac.vel.y;
-
-                float primaryDamp = 0.95f;
-                float secondaryDamp = 0.5f;
-
-                float px = vectorfield[WrapIndex(i -1 , vfX), j].vel.x - vectorfield[WrapIndex(i + 1, vfX), j].vel.x;
-                float py = vectorfield[i, WrapIndex(j - 1, vfY)].vel.y - vectorfield[i, WrapIndex(j + 1, vfY)].vel.y;
-                frac.pressure = (px + py) * 0.5f;
-
-                vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
-                vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
-                /*
-
-                vx = ((Mathf.Min(vectorfield[WrapIndex(i + 1, vfX), j].velBuffer.x, 0) * primaryDamp +
-                    Mathf.Max(vectorfield[WrapIndex(i - 1, vfX), j].velBuffer.x, 0) * primaryDamp)
-                    * 0.5f) +
-                    (vectorfield[i, WrapIndex(j + 1, vfY)].velBuffer.x * secondaryDamp +
-                    vectorfield[i, WrapIndex(j - 1, vfY)].velBuffer.x * secondaryDamp) * 0.5f;
-
-
-
-
-                vy = ((Mathf.Min(vectorfield[i, WrapIndex(j + 1, vfY)].velBuffer.y, 0) * primaryDamp +
-                    Mathf.Max(vectorfield[i, WrapIndex(j - 1, vfY)].velBuffer.y, 0) * primaryDamp)
-                    * 0.5f) + 
-                    (vectorfield[WrapIndex(i + 1, vfX), j].velBuffer.y * secondaryDamp +
-                    vectorfield[WrapIndex(i - 1, vfX), j].velBuffer.y * secondaryDamp)*0.5f;
-                 */
-
-
-
-                vx *= 0.95f;
-                vy *= 0.95f;
-                //frac.vel = Diffuse(i, j)*primaryDamp;
-                frac.vel = new Vector2(vx, vy);
-
+                vectorfield[i, j].vel = Diffuse(i, j);
             }
         }
 
@@ -321,16 +287,16 @@ public class VectorField : MonoBehaviour {
     private Vector2 Diffuse(int indexX, int indexY)
     {
         Vector2 output = new Vector2();
-        for (int i = -1; i < 1; i++)
+        for (int i = -1; i <= 1; i++)
         {
             for (int j = -1; j <= 1; j++)
             {
                 if (i == 0 && j == 0) continue;
                 Vector2 velBuffer = vectorfield[WrapIndex(i+indexX, vfX), WrapIndex(j+indexY, vfY)].velBuffer;
-                output += velBuffer * Mathf.Min(Vector2.Dot(velBuffer, Vector2.zero - new Vector2(i,j)), 0);
+                output += velBuffer * Mathf.Max(Vector2.Dot(velBuffer.normalized,  - new Vector2(i,j).normalized), 0);
             }
         }
-        return output/9;
+        return output/2.8f;
     }
 
 
