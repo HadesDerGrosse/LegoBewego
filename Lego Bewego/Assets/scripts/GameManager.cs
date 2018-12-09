@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     public Canvas gameEndCanvas;
     public Canvas startGameCanvas;
     public ScoreHandler currentScoreHandler;
+    public ScoreHandler finalScoreHandler;
+    public ScoreHandler[] highScoreHandler;
 
 
     public float damageMultiply=1;
@@ -43,10 +45,7 @@ public class GameManager : MonoBehaviour {
             {
                 endGame();
             }
-        }
-
-        
-		
+        }		
 	}
 
 
@@ -81,13 +80,30 @@ public class GameManager : MonoBehaviour {
         highscore[1] = PlayerPrefs.GetInt("2", 0);
         highscore[2] = PlayerPrefs.GetInt("3", 0);
 
-        for(int i=0; i<3; i++)
+        if (score > highscore[0])
         {
-            if(score > highscore[i])
-            {
-                highscore[i] = score;
-                break;
-            }
+            highscore[2] = highscore[1];
+            highscore[1] = highscore[0];
+            highscore[0] = score;
+        }
+
+        else if (score > highscore[1])
+        {
+            highscore[2] = highscore[1];
+            highscore[1] = score;
+        }
+
+        else if (score > highscore[2])
+        {
+            highscore[2] = score;
+        }
+
+        finalScoreHandler.setImages(score);
+
+        for (int i = 0; i < 3; i++)
+        {
+            print(highscore[i]);
+            highScoreHandler[i].setImages(highscore[i]);
         }
 
         PlayerPrefs.SetInt("1", highscore[0]);

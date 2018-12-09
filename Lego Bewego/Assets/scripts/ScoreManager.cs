@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour {
 
     public static Sprite[] intToSpriteArray(int value)
     {
-        string distance = GameManager.getInstance().distanceTreveld.ToString("0000000000");
+        string distance = value.ToString("0000000000");
         char[] numeralArray = distance.ToCharArray();
         Sprite[] sprites = new Sprite[10];
 
