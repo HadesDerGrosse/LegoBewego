@@ -79,6 +79,8 @@ public class VectorField : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
+        hero = HeroStone.getInstance();
+
         RaycastCameraFrustum();
 
         Vector2 newOrigin = new Vector2(Mathf.Floor(cornerBounds.min.x - grow), Mathf.Floor(cornerBounds.min.z - grow));
@@ -145,18 +147,37 @@ public class VectorField : MonoBehaviour {
 
                 // diffuse
                 VectorfieldFraction frac = vectorfield[i, j];
+                frac.velBuffer = frac.vel;
                 float vx = frac.vel.x;
                 float vy = frac.vel.y;
 
+                float primaryDamp = 0.95f;
+                float secondaryDamp = 0.5f;
+
+                /*
                 float px = vectorfield[WrapIndex(i -1 , vfX), j].vel.x - vectorfield[WrapIndex(i + 1, vfX), j].vel.x;
                 float py = vectorfield[i, WrapIndex(j - 1, vfY)].vel.y - vectorfield[i, WrapIndex(j + 1, vfY)].vel.y;
                 frac.pressure = (px + py) * 0.5f;
 
                 vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
                 vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
+                 */
 
-                vx *= 0.95f;
-                vy *= 0.95f;
+                vx = ((Mathf.Min(vectorfield[WrapIndex(i + 1, vfX), j].velBuffer.x, 0) * primaryDamp +
+                    Mathf.Max(vectorfield[WrapIndex(i - 1, vfX), j].velBuffer.x, 0) * primaryDamp)
+                    * 0.5f) +
+                    (vectorfield[i, WrapIndex(j + 1, vfY)].velBuffer.x * secondaryDamp +
+                    vectorfield[i, WrapIndex(j - 1, vfY)].velBuffer.x * secondaryDamp) * 0.5f;
+
+
+                vy = ((Mathf.Min(vectorfield[i, WrapIndex(j + 1, vfY)].velBuffer.y, 0) * primaryDamp +
+                    Mathf.Max(vectorfield[i, WrapIndex(j - 1, vfY)].velBuffer.y, 0) * primaryDamp)
+                    * 0.5f) + 
+                    (vectorfield[WrapIndex(i + 1, vfX), j].velBuffer.y * secondaryDamp +
+                    vectorfield[WrapIndex(i - 1, vfX), j].velBuffer.y * secondaryDamp)*0.5f;
+
+                //vx *= 0.95f;
+                //vy *= 0.95f;
                 frac.vel.Set(vx, vy);
 
             }
@@ -409,10 +430,12 @@ public class VectorfieldFraction
 {
     public float pressure;
     public Vector2 vel;
+    public Vector2 velBuffer;
 
     public VectorfieldFraction()
     {
         pressure = 0f;
         vel = new Vector2();
+        velBuffer = new Vector2();
     }
 }
