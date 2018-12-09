@@ -8,6 +8,9 @@ public class UserInput : MonoBehaviour {
     public Vector2 start;
     public Vector2 end;
     public Image arrow;
+    public float forceFactor = 1;
+    public int forceLength = 10;
+    public int forceWidth = 4;
 
     // Use this for initialization
     void Start () {
@@ -34,7 +37,7 @@ public class UserInput : MonoBehaviour {
         if (Input.GetMouseButtonUp(0))
         {
             end = Input.mousePosition;
-            VectorField.instance.addForce(start, end);
+            VectorField.instance.addForce(start, end, forceFactor, forceLength, forceWidth);
             arrow.transform.localScale = (Vector3.zero);
         }
 	}

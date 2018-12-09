@@ -127,7 +127,9 @@ public class VectorField : MonoBehaviour {
             }
         }
 
-
+        /*
+         * 
+         */
         // force propagation
         for (int i = 0; i < vfX; i++)
         {
@@ -146,8 +148,8 @@ public class VectorField : MonoBehaviour {
                 vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
                 vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
 
-                vx *= 0.98f;
-                vy *= 0.98f;
+                vx *= Mathf.Lerp(1, 0.1f, Time.deltaTime / 1.0f);
+                vy *= Mathf.Lerp(1, 0.1f, Time.deltaTime / 1.0f);
                 frac.vel.Set(vx, vy);
 
             }
@@ -294,7 +296,7 @@ public class VectorField : MonoBehaviour {
 
 
     // input pixel coordinates, raycast to ground and add force
-    public void addForce(Vector2 start, Vector2 end, int size = 0)
+    public void addForce(Vector2 start, Vector2 end, float factor = 1, int length = 8, int width = 4)
     {
         Ray startRay = Camera.main.ScreenPointToRay(start);
         Ray endRay = Camera.main.ScreenPointToRay(end);
@@ -309,14 +311,31 @@ public class VectorField : MonoBehaviour {
             try
             {
                 int[] index = WorldPositionToArrayIndex(startPos);
-                Vector2 force = Vec3ToVec2(endPos - startPos);
-                // core force
-                vectorfield[index[0], index[1]].vel = force;
-                // neighbour forces
-                if (index[0] - 1 > 0) vectorfield[index[0] - 1, index[1]].vel = force * 0.75f;
-                if (index[1] - 1 > 0) vectorfield[index[0], index[1] - 1].vel = force * 0.75f;
-                if (index[0] + 1 < vfX) vectorfield[index[0] + 1, index[1]].vel = force * 0.75f;
-                if (index[1] + 1 < vfY) vectorfield[index[0], index[1] + 1].vel = force * 0.75f;
+                Vector2 force = Vec3ToVec2(endPos - startPos) * factor;
+
+                Vector2 direction = (end - start).normalized;
+                Vector2 step = Vector2.zero - direction * 2;
+
+                Vector2 widthDirection = Vector2.Perpendicular(step).normalized;
+
+                for (int i = 0; i < length; i++)
+                {
+                    int x = WrapIndex(index[0] + (int)step.x, vfX);
+                    int y = WrapIndex(index[1] + (int)step.y, vfY);
+                    vectorfield[x, y].vel = force * Mathf.Lerp(1,0.5f,(float)i/length);
+
+                    Vector2 widthStep = Vector2.zero - widthDirection * (width / 2);
+
+                    for (int j = 0; j < width; j++)
+                    {
+                        int wx = WrapIndex((int)(x+widthStep.x),vfX);
+                        int wy = WrapIndex((int)(y+widthStep.y),vfY);
+                        vectorfield[wx, wy].vel = force * Mathf.Lerp(1, 0.5f, (float)i / length);
+                        widthStep = widthStep + widthDirection;
+                    }
+
+                    step = step + direction;
+                }
             }
             catch (System.IndexOutOfRangeException e) {
                 print("Index out of range in addForce of Vector Field");
