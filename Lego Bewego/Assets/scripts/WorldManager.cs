@@ -11,6 +11,9 @@ public class WorldManager : MonoBehaviour {
     public Transform borderTransform;
     public Transform minesTransform;
 
+    public int poolSize;
+    public int activeSize;
+
 
 
     public List<GameObject> mines;
@@ -33,8 +36,6 @@ public class WorldManager : MonoBehaviour {
     public int visibleDistance = 2;
     public int minIslandDistance = 10;
 
-    private float currentPos;
-
     public static WorldManager getInstance()
     {
         return instance;
@@ -42,10 +43,10 @@ public class WorldManager : MonoBehaviour {
 
     void Awake()
     {
-        groupyPool = new GameObjectPool(groupies, groupieTransform.gameObject, 15);
-        borderPool = new GameObjectPool(borderTiles, borderTransform.gameObject,10);
-        islandPool = new GameObjectPool(islandTiles, islandTransform.gameObject,10);
-        minePool = new GameObjectPool(mines, minesTransform.gameObject, 10);
+        groupyPool = new GameObjectPool(groupies, groupieTransform.gameObject, 0);
+        borderPool = new GameObjectPool(borderTiles, borderTransform.gameObject,0);
+        islandPool = new GameObjectPool(islandTiles, islandTransform.gameObject,0);
+        minePool = new GameObjectPool(mines, minesTransform.gameObject, 0);
         
         if(instance == null)
         {
@@ -72,7 +73,11 @@ public class WorldManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+
+        activeSize = groupyPool.active.Count;
+
+
         float deletePos = Camera.main.transform.position.x - visibleDistance;
 
         if (borderPool.active[0].transform.position.x <deletePos)
@@ -81,25 +86,17 @@ public class WorldManager : MonoBehaviour {
             removeBorderTileFromWorld();            
         }
 
-
-        for( int i =0; i < groupieTransform.childCount; i++)
-        {
-            GameObject g = groupieTransform.GetChild(i).gameObject;
-            if (g.activeSelf && !g.GetComponent<StoneContainer>().crushed && g.transform.position.x < deletePos)
-            {
-                groupyPool.add(groupieTransform.GetChild(i).gameObject);
-            }
-        }
-
-        /*
         foreach (GameObject groupy in groupyPool.active)
         {
             if (groupy.transform.position.x < deletePos)
             {
+                groupy.GetComponent<StoneContainer>().reset();
                 groupyPool.add(groupy);
+
                 break;
             }
-        }*/
+        }
+
 
         foreach (GameObject island in islandPool.active)
         {

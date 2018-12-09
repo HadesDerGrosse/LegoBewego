@@ -10,8 +10,6 @@ public class Island : MonoBehaviour {
     public List<Transform> minePositions;
     public List<Transform> decoPosition;
 
-    public GameObject groupy;
-
     public float emptyPossibility;
     public float minePossibility;
 
@@ -61,7 +59,8 @@ public class Island : MonoBehaviour {
                 else
                 {
                     GameObject go = WorldManager.getInstance().groupyPool.get();
-                    go.transform.position = t.position;
+                    Debug.Log(t.position);
+                    go.transform.localPosition = t.position;
                 }
 
             }

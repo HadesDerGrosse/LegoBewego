@@ -16,7 +16,7 @@ public class StoneContainer : MonoBehaviour {
     public bool crushed = false;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         currentHealth = startHealth;
         children = new List<Transform>();
 
@@ -31,7 +31,7 @@ public class StoneContainer : MonoBehaviour {
 
         if (crushed)
         {
-            if(crushTime+ resetTime< Time.time)
+            if(crushTime + resetTime< Time.time)
             {
                 reset();
             }
@@ -58,7 +58,7 @@ public class StoneContainer : MonoBehaviour {
         {
             Rigidbody rig = children[i].gameObject.GetComponent<Rigidbody>();
             VectorField.instance.removeParticle(rig);
-            children[i].position = startPositions[i];
+            children[i].localPosition = startPositions[i];
             children[i].localRotation = Quaternion.identity;
             Destroy(rig);
         }
