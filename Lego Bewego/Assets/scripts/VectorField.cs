@@ -8,7 +8,7 @@ public class VectorField : MonoBehaviour {
 
     public List<Rigidbody> particles;
 
-    public float forceFactor = 50;
+    public float forceFactor = 10;
 
 
     private VectorfieldFraction[,] vectorfield;
@@ -135,9 +135,6 @@ public class VectorField : MonoBehaviour {
             {
 
                 // diffuse
-                float x = vectorfield[i, j].vel.x;
-                float y = vectorfield[i, j].vel.y;
-
                 VectorfieldFraction frac = vectorfield[i, j];
                 float vx = frac.vel.x;
                 float vy = frac.vel.y;
@@ -286,9 +283,8 @@ public class VectorField : MonoBehaviour {
         {
             indizes = WorldPositionToArrayIndex(position);
         }
-        catch (System.IndexOutOfRangeException e)
+        catch (System.IndexOutOfRangeException)
         {
-            //print(e.Message);
             return new Vector3();
         }
         int x = indizes[0];
