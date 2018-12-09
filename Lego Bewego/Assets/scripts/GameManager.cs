@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
         VectorField.instance.addParticle(HeroStone.getInstance().GetComponent<Rigidbody>());        
         currentScoreCanvas.gameObject.SetActive(true);
         startGameCanvas.gameObject.SetActive(false);
+        AudioManager.instance.setIngame();
     }
 
     public void endGame()
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour {
         gameEndCanvas.gameObject.SetActive(true);
         currentScoreCanvas.gameObject.SetActive(false);
         endTimeTextField.text = distanceTreveld.ToString("0.00") + "m";
+        HeroStone.getInstance().enabled = false;
+
+        AudioManager.instance.setMenue();
     }
 
     public void startLevel()    {

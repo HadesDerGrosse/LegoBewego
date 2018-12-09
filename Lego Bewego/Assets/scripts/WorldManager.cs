@@ -98,7 +98,7 @@ public class WorldManager : MonoBehaviour {
     private void removeBorderTileFromWorld()
     {
         borderPool.add(borderPool.active[0]);
-        borderPool.add(borderPool.active[1]);
+        borderPool.add(borderPool.active[0]);
     }
 
     private void addBorderTileToWorld()

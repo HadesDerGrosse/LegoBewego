@@ -17,6 +17,9 @@ public class Island : MonoBehaviour {
 
     void Awake()
     {
+        minePositions.Clear();
+        decoPosition.Clear();
+
         Transform logicHRC = transform.GetChild(0);
         for (int i = 0; i < logicHRC.childCount; i++)
         {            
@@ -28,11 +31,11 @@ public class Island : MonoBehaviour {
 
             if (logicHRC.GetChild(i).name.Contains("UBX"))
             {
-                MeshCollider mc = logicHRC.GetChild(i).gameObject.AddComponent<MeshCollider>();
+                BoxCollider mc = logicHRC.GetChild(i).gameObject.AddComponent<BoxCollider>();
                 MeshRenderer mr = logicHRC.GetChild(i).gameObject.GetComponent<MeshRenderer>();
-                MeshFilter mf = logicHRC.GetChild(i).gameObject.GetComponent<MeshFilter>();
-                mc.sharedMesh = mf.sharedMesh;
                 mr.enabled = false;
+                logicHRC.GetChild(i).localScale = new Vector3(1, 5, 1);
+                logicHRC.GetChild(i).localPosition = new Vector3(0, 0, -3);
 
             }
         }

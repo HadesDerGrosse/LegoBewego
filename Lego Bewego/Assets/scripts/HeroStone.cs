@@ -26,12 +26,16 @@ public class HeroStone : MonoBehaviour {
 	void Update () {
 
         GameManager.getInstance().distanceTreveld = Mathf.Max(transform.position.x, GameManager.getInstance().distanceTreveld)*0.016f;
+
+        if(transform.position.y < -2)
+        {
+            GameManager.getInstance().endGame();
+        }
 		
 	}
 
     void OnDestroy()
     {
-        VectorField.instance.removeParticle(GetComponent<Rigidbody>());
-        GameManager.getInstance().endGame();
+       
     }
 }

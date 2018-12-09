@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4505350975605722}
   - component: {fileID: 33299482897844872}
   - component: {fileID: 23665110793065916}
-  - component: {fileID: 64712913183474588}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_08
   m_TagString: Untagged
@@ -69,7 +68,6 @@ GameObject:
   - component: {fileID: 4946976658737192}
   - component: {fileID: 33533359624557992}
   - component: {fileID: 23108133355243998}
-  - component: {fileID: 64889425035584980}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_06
   m_TagString: Untagged
@@ -102,7 +100,6 @@ GameObject:
   - component: {fileID: 4496401118170548}
   - component: {fileID: 33827787565310888}
   - component: {fileID: 23818974752000706}
-  - component: {fileID: 64561247415684468}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_00
   m_TagString: Untagged
@@ -135,7 +132,6 @@ GameObject:
   - component: {fileID: 4191085307551564}
   - component: {fileID: 33825665105281020}
   - component: {fileID: 23306559299386512}
-  - component: {fileID: 64869086287969948}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_10
   m_TagString: Untagged
@@ -153,7 +149,6 @@ GameObject:
   - component: {fileID: 4920297736700232}
   - component: {fileID: 33708605789376716}
   - component: {fileID: 23147105559308462}
-  - component: {fileID: 64171234517296726}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_07
   m_TagString: Untagged
@@ -171,7 +166,6 @@ GameObject:
   - component: {fileID: 4088031078701824}
   - component: {fileID: 33899616880336328}
   - component: {fileID: 23669002885036026}
-  - component: {fileID: 64908450703425214}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_09
   m_TagString: Untagged
@@ -234,7 +228,6 @@ GameObject:
   - component: {fileID: 4582961135790376}
   - component: {fileID: 33380958062986560}
   - component: {fileID: 23711479127330304}
-  - component: {fileID: 64131144138472234}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_02
   m_TagString: Untagged
@@ -282,7 +275,6 @@ GameObject:
   - component: {fileID: 4621365507579948}
   - component: {fileID: 33789674479633804}
   - component: {fileID: 23270292921487036}
-  - component: {fileID: 64298936133784714}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_01
   m_TagString: Untagged
@@ -316,7 +308,6 @@ GameObject:
   - component: {fileID: 4458801976110398}
   - component: {fileID: 33927903795167252}
   - component: {fileID: 23692670726605346}
-  - component: {fileID: 64289897669375076}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_04
   m_TagString: Untagged
@@ -351,7 +342,6 @@ GameObject:
   - component: {fileID: 4307647785624116}
   - component: {fileID: 33466555266235348}
   - component: {fileID: 23037489994969142}
-  - component: {fileID: 64138043039485660}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_03
   m_TagString: Untagged
@@ -384,7 +374,6 @@ GameObject:
   - component: {fileID: 4072317240357872}
   - component: {fileID: 33479996326330424}
   - component: {fileID: 23295454462599386}
-  - component: {fileID: 64824233181116544}
   m_Layer: 0
   m_Name: UBX_SM_leaInt_islandSmall01_05
   m_TagString: Untagged
@@ -1363,160 +1352,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569298180107260}
   m_Mesh: {fileID: 4300012, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64131144138472234
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1408982726881636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300016, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64138043039485660
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1651201633029484}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300014, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64171234517296726
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1330927485385224}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300006, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64289897669375076
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1569298180107260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300012, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64298936133784714
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1524629984164992}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300018, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64561247415684468
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1221412672807940}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300020, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64712913183474588
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1009315026058678}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300004, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64824233181116544
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710293542115910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300010, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64869086287969948
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1303018068874966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64889425035584980
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1163530270596152}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300008, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
---- !u!64 &64908450703425214
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1336713917693416}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300002, guid: 1ab7786b9568b1c40ae49dc370511b87, type: 3}
 --- !u!114 &114406736770957662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1529,15 +1364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dimensions: {x: 0, y: 0, z: 0}
-  minePositions:
-  - {fileID: 4265475115786974}
-  - {fileID: 4765285968156670}
-  - {fileID: 4463468283658818}
-  - {fileID: 4244459734711872}
-  - {fileID: 4561254073037114}
-  - {fileID: 4814114735943772}
-  - {fileID: 4475551592094760}
-  - {fileID: 4898674632140780}
+  minePositions: []
   decoPosition: []
   groupy: {fileID: 1150364190773806, guid: 68feb88256276c9478b534bcacd877a6, type: 2}
   emptyPossibility: 0.5

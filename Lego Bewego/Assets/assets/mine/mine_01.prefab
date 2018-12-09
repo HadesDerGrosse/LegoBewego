@@ -358,6 +358,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1333192659228236, guid: 04812e9f3a28c9d4e8e89e1cd5a61ef7, type: 2}
-  range: 25
-  force: 300
-  angleSpeed: {x: 0, y: 0, z: 5}
+  range: 50
+  force: 500
+  angleSpeed: {x: 0, y: 0, z: 15}
