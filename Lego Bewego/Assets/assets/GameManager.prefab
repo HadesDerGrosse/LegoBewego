@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0775fb9de19222043aa4a217c0332fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugVectorField: 1
+  debugVectorField: 0
 --- !u!114 &114371426197095326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1624,6 +1624,8 @@ MonoBehaviour:
   heroAttractionForce: 50
   heroAttractionDist: 30
   maxForce: 15
+  visualizeVectors: 1
+  lineMat: {fileID: 2100000, guid: 285a1c4971d76be41b37c756d1115a27, type: 2}
 --- !u!114 &114915555727482666
 MonoBehaviour:
   m_ObjectHideFlags: 1

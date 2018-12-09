@@ -99,8 +99,7 @@ public class GameManager : MonoBehaviour {
         VectorField.instance.clearParticles();               
         startGameCanvas.gameObject.SetActive(true);
         gameEndCanvas.gameObject.SetActive(false);
-        distanceTreveld = 0;
-        
+        distanceTreveld = 0;        
     }
 
     public void quitGame()
