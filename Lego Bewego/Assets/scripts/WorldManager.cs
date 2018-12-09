@@ -7,7 +7,13 @@ public class WorldManager : MonoBehaviour {
     private static WorldManager instance;
 
     public List<GameObject> mines;
-    public static GameObjectPool minePool;
+    public GameObjectPool minePool;
+    public List<GameObject> currentMines;
+
+    public List<GameObject> groupies;
+    public GameObjectPool groupyPool;
+    public List<GameObject> currentGroupies;
+
 
     public List<GameObject> islandTiles;
     public List<GameObject> currentIslandTiles;
@@ -35,9 +41,11 @@ public class WorldManager : MonoBehaviour {
     void Awake()
     {
         currentBorderTiles = new List<GameObject>();
+        currentMines = new List<GameObject>();
+        groupyPool = new GameObjectPool(groupies, this.gameObject, 15);
         borderPool = new GameObjectPool(borderTiles, this.gameObject,10);
         islandPool = new GameObjectPool(islandTiles, this.gameObject,10);
-        minePool = new GameObjectPool(mines, this.gameObject, 20);
+        minePool = new GameObjectPool(mines, this.gameObject, 1);
         
         if(instance == null)
         {
@@ -55,7 +63,7 @@ public class WorldManager : MonoBehaviour {
             addBorderTileToWorld();
         }
 
-        for(int i = 0; i<3; i++)
+        for(int i = 0; i<5; i++)
         {
             addIslandToWorld();
         }
@@ -79,6 +87,12 @@ public class WorldManager : MonoBehaviour {
             removeIslandFromWorld();
         }
 
+        if(currentPos-currentMines[0].transform.position.x > visibleDistance)
+        {
+            
+            minePool.add(currentMines[0]);
+            currentMines.RemoveAt(0);
+        }
     }
 
     private void removeBorderTileFromWorld()
@@ -109,10 +123,10 @@ public class WorldManager : MonoBehaviour {
     {
         GameObject go = islandPool.get();
         Island island = go.GetComponent<Island>();
-        go.transform.position = new Vector3(nextIslandPosition + island.dimensions.x/2, 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
+        go.transform.position = new Vector3(Mathf.Max(nextIslandPosition + island.dimensions.x/2,visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
         go.transform.rotation = Quaternion.Euler(-90, UnityEngine.Random.Range(-islandAngle, islandAngle), 180);
         currentIslandTiles.Add(go);
-        island.placeMines();
+        island.placeInteracts();
         nextIslandPosition += island.dimensions.x + UnityEngine.Random.Range(0,30) + minIslandDistance;
 
     }

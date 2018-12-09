@@ -25,7 +25,6 @@ public class DeathTrap : MonoBehaviour {
         {
             VectorField.instance.removeParticle(collision.rigidbody);
             collision.rigidbody.constraints = RigidbodyConstraints.None;
-            Destroy(collision.gameObject,5);
 
             GameObject go = Instantiate(explosion);
             go.transform.position = transform.position;
@@ -36,11 +35,11 @@ public class DeathTrap : MonoBehaviour {
                 if (c.GetComponent<Rigidbody>() != null)
                 {
                     c.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, range);
-                    Debug.Log(c.transform.name);
                 }
             }
 
-            WorldManager.minePool.add(this.gameObject);
+            WorldManager.getInstance().minePool.add(this.gameObject);
+            WorldManager.getInstance().currentMines.Remove(this.gameObject);
         }
         
     }

@@ -10,6 +10,9 @@ public class Island : MonoBehaviour {
     public List<Transform> minePositions;
     public List<Transform> decoPosition;
 
+    public GameObject groupy;
+
+    public float emptyPossibility;
     public float minePossibility;
 
     void Awake()
@@ -40,17 +43,27 @@ public class Island : MonoBehaviour {
 	void Start () {
         
 
-        placeMines();
+        placeInteracts();
 	}
 
-    public void placeMines()
+    public void placeInteracts()
     {
         foreach (Transform t in minePositions)
         {
-            if (UnityEngine.Random.Range(0.0f, 1.0f) < minePossibility)
+            if (UnityEngine.Random.Range(0.0f, 1.0f) > emptyPossibility)
             {
-                GameObject go = WorldManager.minePool.get();
-                go.transform.position = t.position;
+                if(UnityEngine.Random.Range(0.0f, 1.0f) < minePossibility)
+                {
+                    GameObject go = WorldManager.getInstance().minePool.get();
+                    go.transform.position = t.position;
+                    WorldManager.getInstance().currentMines.Add(go);
+                }
+                else
+                {
+                    GameObject go = WorldManager.getInstance().groupyPool.get();
+                    go.transform.position = t.position;
+                    WorldManager.getInstance().currentGroupies.Add(go);
+                }
 
             }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameObjectPool{
 
     private List<GameObject> pool;
+    public List<GameObject> active;
     private List<GameObject> assets;
     private GameObject root;
 
@@ -37,6 +38,7 @@ public class GameObjectPool{
         int index = UnityEngine.Random.Range(0, pool.Count);
         go = pool[index];
         pool.RemoveAt(index);
+        active.Add(go);
         go.SetActive(true);
         return go;
     }
@@ -45,5 +47,6 @@ public class GameObjectPool{
     {
         pool.Add(go);
         go.SetActive(false);
+        active.Remove(go);
     }
 }

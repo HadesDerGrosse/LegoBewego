@@ -9,6 +9,7 @@ public class StoneContainer : MonoBehaviour {
     public int currentHealth = 0;
     public float damageMulti = 1.0f;
     public List<Transform> children;
+    public List<Vector3> startPositions;
 
 	// Use this for initialization
 	void Start () {
@@ -17,12 +18,24 @@ public class StoneContainer : MonoBehaviour {
 
         for(int i = 0; i<transform.childCount; i++){
             children.Add(transform.GetChild(i));
+            startPositions.Add(transform.GetChild(i).position);
         }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        foreach(Transform t in children)
+        {
+            if(t.position.x > Camera.main.transform.position.x - WorldManager.getInstance().visibleDistance)
+            {
+                return;
+            }
+        }
+
+        reset();
+
+
 	}
 
     void OnCollisionEnter(Collision collision)
@@ -34,12 +47,28 @@ public class StoneContainer : MonoBehaviour {
 
             if (currentHealth <= 0)
             {
-                crush();
+                crush(collision.collider.transform.position, damage);
             }
         }             
     }
 
-    public void crush()
+    public void reset()
+    {
+        for(int i = 0; i < children.Count; i++)
+        {
+            Rigidbody rig = children[i].gameObject.GetComponent<Rigidbody>();
+            VectorField.instance.removeParticle(rig);
+            children[i].position = startPositions[i];
+            children[i].localRotation = Quaternion.identity;
+            Destroy(rig);
+        }
+
+        WorldManager.getInstance().groupyPool.add(this.gameObject);
+        WorldManager.getInstance().currentGroupies.Remove(this.gameObject);
+
+    }
+
+    public void crush(Vector3 position, float force)
     {
         foreach(Transform child in children)
         {
@@ -47,11 +76,14 @@ public class StoneContainer : MonoBehaviour {
             {
                 Rigidbody rig = child.gameObject.AddComponent<Rigidbody>();
                 rig.constraints = RigidbodyConstraints.FreezePositionY;
+                rig.drag = 0.25f;
+                rig.gameObject.tag = "stone";
+                rig.AddExplosionForce(force * 20, position, force*2);
                 VectorField.instance.addParticle(rig);
-                child.parent = this.transform.parent;
+                //child.parent = this.transform.parent;
             }            
         }
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }
