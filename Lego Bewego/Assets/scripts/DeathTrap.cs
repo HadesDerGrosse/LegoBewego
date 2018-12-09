@@ -39,7 +39,6 @@ public class DeathTrap : MonoBehaviour {
             }
 
             WorldManager.getInstance().minePool.add(this.gameObject);
-            WorldManager.getInstance().currentMines.Remove(this.gameObject);
         }
         
     }

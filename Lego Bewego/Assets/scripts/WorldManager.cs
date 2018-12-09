@@ -6,21 +6,23 @@ public class WorldManager : MonoBehaviour {
 
     private static WorldManager instance;
 
+    public Transform islandTransform;
+    public Transform groupieTransform;
+    public Transform borderTransform;
+    public Transform minesTransform;
+
+
+
     public List<GameObject> mines;
     public GameObjectPool minePool;
-    public List<GameObject> currentMines;
 
     public List<GameObject> groupies;
     public GameObjectPool groupyPool;
-    public List<GameObject> currentGroupies;
-
 
     public List<GameObject> islandTiles;
-    public List<GameObject> currentIslandTiles;
     private GameObjectPool islandPool;
 
     public List<GameObject> borderTiles;
-    private List<GameObject> currentBorderTiles;
     private GameObjectPool borderPool;
 
     public int levelHeight = 50;
@@ -40,12 +42,10 @@ public class WorldManager : MonoBehaviour {
 
     void Awake()
     {
-        currentBorderTiles = new List<GameObject>();
-        currentMines = new List<GameObject>();
-        groupyPool = new GameObjectPool(groupies, this.gameObject, 15);
-        borderPool = new GameObjectPool(borderTiles, this.gameObject,10);
-        islandPool = new GameObjectPool(islandTiles, this.gameObject,10);
-        minePool = new GameObjectPool(mines, this.gameObject, 1);
+        groupyPool = new GameObjectPool(groupies, groupieTransform.gameObject, 15);
+        borderPool = new GameObjectPool(borderTiles, borderTransform.gameObject,10);
+        islandPool = new GameObjectPool(islandTiles, islandTransform.gameObject,10);
+        minePool = new GameObjectPool(mines, minesTransform.gameObject, 10);
         
         if(instance == null)
         {
@@ -75,41 +75,36 @@ public class WorldManager : MonoBehaviour {
 	void Update () {
         currentPos = Camera.main.transform.position.x;
 
-        if (currentPos - currentBorderTiles[0].transform.position.x > visibleDistance)
+        if (currentPos - borderPool.active[0].transform.position.x > visibleDistance)
         {
             addBorderTileToWorld();
             removeBorderTileFromWorld();            
         }
 
-        if (currentPos - currentIslandTiles[0].transform.position.x > visibleDistance)
+        if (currentPos - islandPool.active[0].transform.position.x > visibleDistance)
         {
             addIslandToWorld();
             removeIslandFromWorld();
         }
 
-        if(currentPos-currentMines[0].transform.position.x > visibleDistance)
+        
+        if(minePool.active.Count > 0 && currentPos -minePool.active[0].transform.position.x > visibleDistance)
         {
             
-            minePool.add(currentMines[0]);
-            currentMines.RemoveAt(0);
+            minePool.add(minePool.active[0]);
         }
     }
 
     private void removeBorderTileFromWorld()
     {
-        borderPool.add(currentBorderTiles[0]);
-        borderPool.add(currentBorderTiles[1]);
-        currentBorderTiles.RemoveAt(0);
-        currentBorderTiles.RemoveAt(0);
+        borderPool.add(borderPool.active[0]);
+        borderPool.add(borderPool.active[1]);
     }
 
     private void addBorderTileToWorld()
     {
         GameObject tileUp = borderPool.get();
         GameObject tileDown = borderPool.get();
-
-        currentBorderTiles.Add(tileUp);
-        currentBorderTiles.Add(tileDown);
 
         tileDown.transform.position = new Vector3(lastBorderTilePos, -1.0f, -levelHeight / 2.0f);
         tileUp.transform.position = new Vector3(lastBorderTilePos, -1.0f, levelHeight / 2.0f);
@@ -125,7 +120,6 @@ public class WorldManager : MonoBehaviour {
         Island island = go.GetComponent<Island>();
         go.transform.position = new Vector3(Mathf.Max(nextIslandPosition + island.dimensions.x/2,visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
         go.transform.rotation = Quaternion.Euler(-90, UnityEngine.Random.Range(-islandAngle, islandAngle), 180);
-        currentIslandTiles.Add(go);
         island.placeInteracts();
         nextIslandPosition += island.dimensions.x + UnityEngine.Random.Range(0,30) + minIslandDistance;
 
@@ -133,7 +127,6 @@ public class WorldManager : MonoBehaviour {
 
     private void removeIslandFromWorld()
     {
-        islandPool.add(currentIslandTiles[0]);
-        currentIslandTiles.RemoveAt(0);
+        islandPool.add(islandPool.active[0]);
     }
 }

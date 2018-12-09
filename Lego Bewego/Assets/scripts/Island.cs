@@ -41,9 +41,7 @@ public class Island : MonoBehaviour {
     }
     
 	void Start () {
-        
 
-        placeInteracts();
 	}
 
     public void placeInteracts()
@@ -56,13 +54,11 @@ public class Island : MonoBehaviour {
                 {
                     GameObject go = WorldManager.getInstance().minePool.get();
                     go.transform.position = t.position;
-                    WorldManager.getInstance().currentMines.Add(go);
                 }
                 else
                 {
                     GameObject go = WorldManager.getInstance().groupyPool.get();
                     go.transform.position = t.position;
-                    WorldManager.getInstance().currentGroupies.Add(go);
                 }
 
             }

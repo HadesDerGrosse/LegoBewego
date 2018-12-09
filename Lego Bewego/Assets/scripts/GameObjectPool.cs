@@ -12,6 +12,7 @@ public class GameObjectPool{
     public GameObjectPool(List<GameObject> pAssets, GameObject pRoot,int count)
     {
         pool = new List<GameObject>();
+        active = new List<GameObject>();
         assets = pAssets;
         root = pRoot;
 

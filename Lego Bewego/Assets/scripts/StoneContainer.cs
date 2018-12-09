@@ -64,7 +64,6 @@ public class StoneContainer : MonoBehaviour {
         }
 
         WorldManager.getInstance().groupyPool.add(this.gameObject);
-        WorldManager.getInstance().currentGroupies.Remove(this.gameObject);
 
     }
 
@@ -83,7 +82,5 @@ public class StoneContainer : MonoBehaviour {
                 //child.parent = this.transform.parent;
             }            
         }
-
-        //Destroy(this.gameObject);
     }
 }
