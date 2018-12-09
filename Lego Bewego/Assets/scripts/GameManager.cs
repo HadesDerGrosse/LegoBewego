@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public float distanceTreveld;
     private bool gameIsRunning = false;
 
+    public string level;
+
     public Canvas currentScoreCanvas;
     public Canvas gameEndCanvas;
     public Canvas startGameCanvas;
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour {
 
     public void startLevel(){
 
-        Application.LoadLevel(index: 1);
+        Application.LoadLevel(level);
         VectorField.instance.clearParticles();               
         startGameCanvas.gameObject.SetActive(true);
         gameEndCanvas.gameObject.SetActive(false);

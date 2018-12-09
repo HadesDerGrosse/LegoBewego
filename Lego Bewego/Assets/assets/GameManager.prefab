@@ -1456,6 +1456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTreveld: 0
+  level: hades
   currentScoreCanvas: {fileID: 223567961204473354}
   gameEndCanvas: {fileID: 223192930593103186}
   startGameCanvas: {fileID: 223538789527079362}
