@@ -15,9 +15,11 @@ public class CameraMovement : MonoBehaviour {
 
         if (HeroStone.getInstance() != null)
         {
-            Vector3 heroPos = HeroStone.getInstance().transform.position;            
+            Vector3 heroPos = HeroStone.getInstance().transform.position;
 
-            float x = Mathf.Lerp(heroPos.x, transform.position.x,0.95f);
+            float xSpeed = HeroStone.getInstance().GetComponent<Rigidbody>().velocity.x*0.2f;
+
+            float x = Mathf.Max(Mathf.Lerp(heroPos.x+xSpeed, transform.position.x,0.95f), transform.position.x);
             float z = Mathf.Clamp(Mathf.Lerp(heroPos.z, transform.position.z, 0.95f),-maxZ,maxZ);
             float y = transform.position.y;
 
