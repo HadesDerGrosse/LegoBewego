@@ -31,11 +31,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (gameIsRunning)
-        {
-            currentScoreTextField.text = distanceTreveld.ToString("0.00") + "m";
-        }
-
         if(HeroStone.getInstance().transform.position.x < Camera.main.transform.position.x - WorldManager.getInstance().visibleDistance)
         {
             endGame();

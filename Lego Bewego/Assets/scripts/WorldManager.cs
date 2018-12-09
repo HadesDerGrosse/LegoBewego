@@ -11,11 +11,6 @@ public class WorldManager : MonoBehaviour {
     public Transform borderTransform;
     public Transform minesTransform;
 
-    public int poolSize;
-    public int activeSize;
-
-
-
     public List<GameObject> mines;
     public GameObjectPool minePool;
 
@@ -74,10 +69,6 @@ public class WorldManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
-        activeSize = groupyPool.active.Count;
-
-
         float deletePos = Camera.main.transform.position.x - visibleDistance;
 
         if (borderPool.active[0].transform.position.x <deletePos)

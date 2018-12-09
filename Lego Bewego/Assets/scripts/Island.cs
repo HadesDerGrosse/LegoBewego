@@ -29,7 +29,7 @@ public class Island : MonoBehaviour {
 
             if (logicHRC.GetChild(i).name.Contains("UBX"))
             {
-                BoxCollider mc = logicHRC.GetChild(i).gameObject.AddComponent<BoxCollider>();
+                logicHRC.GetChild(i).gameObject.AddComponent<BoxCollider>();
                 MeshRenderer mr = logicHRC.GetChild(i).gameObject.GetComponent<MeshRenderer>();
                 mr.enabled = false;
                 logicHRC.GetChild(i).localScale += Vector3.up * 5;
@@ -59,7 +59,6 @@ public class Island : MonoBehaviour {
                 else
                 {
                     GameObject go = WorldManager.getInstance().groupyPool.get();
-                    Debug.Log(t.position);
                     go.transform.localPosition = t.position;
                 }
 

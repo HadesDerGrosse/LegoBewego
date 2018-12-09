@@ -2532,5 +2532,5 @@ MonoBehaviour:
   dimensions: {x: 0, y: 0, z: 0}
   minePositions: []
   decoPosition: []
-  emptyPossibility: 0.1
-  minePossibility: 0.2
+  emptyPossibility: 0.5
+  minePossibility: 0.25

@@ -22,7 +22,7 @@ public class StoneContainer : MonoBehaviour {
 
         for(int i = 0; i<transform.childCount; i++){
             children.Add(transform.GetChild(i));
-            startPositions.Add(transform.GetChild(i).position);
+            startPositions.Add(transform.GetChild(i).localPosition);
         }
 	}
 	
@@ -69,6 +69,7 @@ public class StoneContainer : MonoBehaviour {
 
     public void crush(Vector3 position, float force)
     {
+        AudioManager.instance.playGroupy();
         crushed = true;
         crushTime = Time.time;
         foreach(Transform child in children)

@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour {
 
     public AudioSource inGame;
     public AudioSource menue;
+    public AudioSource death;
+    public AudioSource click;
+    public AudioSource groupy;
 
 
 
@@ -39,5 +42,10 @@ public class AudioManager : MonoBehaviour {
     {
         menue.enabled = true;
         inGame.enabled = false;
+    }
+
+    public void playGroupy()
+    {
+        groupy.Play();
     }
 }
