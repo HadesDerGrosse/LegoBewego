@@ -13,6 +13,8 @@ public class VectorField : MonoBehaviour {
     public float heroAttractionForce = 10;
     public float heroAttractionDist = 30;
 
+    public float maxForce = 15;
+
 
     private VectorfieldFraction[,] vectorfield;
     // store the current extents of the vectorfield
@@ -342,9 +344,13 @@ public class VectorField : MonoBehaviour {
             {
                 int[] index = WorldPositionToArrayIndex(startPos);
                 Vector2 force = Vec3ToVec2(endPos - startPos) * factor;
+                if (force.magnitude > maxForce)
+                {
+                    force = force.normalized * maxForce;
+                }
 
                 Vector2 direction = (end - start).normalized;
-                Vector2 step = Vector2.zero - direction * 2;
+                Vector2 step = Vector2.zero - direction * 4;
 
                 Vector2 widthDirection = Vector2.Perpendicular(step).normalized;
 

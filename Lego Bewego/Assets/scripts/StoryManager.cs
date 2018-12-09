@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class StoryManager : MonoBehaviour {
 
-    public Image[] characters;
+    public Sprite[] characters;
     public string[] story;
 
     public Image storyguy;
     public Text storyText;
     public RectTransform parentTransform;
 
-    private bool moving = false;
-    private bool showing = false;
+    public float storyEventDistance = 200;
+
+    private float lastStory = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -22,12 +23,15 @@ public class StoryManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("s")) toggleStory();
+        Animation anim = parentTransform.GetComponent<Animation>();
+        if (!anim.isPlaying && lastStory + storyEventDistance < Camera.main.transform.position.x)
+        {
+            lastStory = Camera.main.transform.position.x;
+            storyguy.sprite = characters[Random.Range(0, characters.Length)];
+            storyText.text = story[Random.Range(0,story.Length)];
+            anim.Play();
+        }
 	}
-
-    public void toggleStory()
-    {
-        parentTransform.GetComponent<Animation>().Play();
-    }
+    
 
 }
