@@ -22,8 +22,7 @@ public class GameObjectPool{
 
     private GameObject createGameObject()
     {
-        GameObject go = GameObject.Instantiate(assets[UnityEngine.Random.Range(0, assets.Count)]);
-        go.transform.parent = root.transform;
+        GameObject go = GameObject.Instantiate(assets[UnityEngine.Random.Range(0, assets.Count)],root.transform);
         pool.Add(go);
         go.SetActive(false);
         return go;

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioClip inGame;
-    public AudioClip menue;
+    public AudioSource inGame;
+    public AudioSource menue;
 
-    private AudioSource source;
+
 
     public static AudioManager instance;
 
@@ -17,12 +17,11 @@ public class AudioManager : MonoBehaviour {
         {
             instance = this;
         }
-        source = GetComponent<AudioSource>();
     }
 
 	// Use this for initialization
 	void Start () {
-        source.clip = menue;
+        setMenue();
 	}
 	
 	// Update is called once per frame
@@ -32,13 +31,13 @@ public class AudioManager : MonoBehaviour {
 
     public void setIngame()
     {
-        source.clip = inGame;
-        source.Play();
+        menue.enabled = false;
+        inGame.enabled = true;
     }
 
     public void setMenue()
     {
-        source.clip = menue;
-        source.Play();
+        menue.enabled = true;
+        inGame.enabled = false;
     }
 }

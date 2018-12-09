@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour {
         {
             currentScoreTextField.text = distanceTreveld.ToString("0.00") + "m";
         }
+
+        if(HeroStone.getInstance().transform.position.x < Camera.main.transform.position.x - WorldManager.getInstance().visibleDistance)
+        {
+            endGame();
+        }
 		
 	}
 
@@ -46,34 +51,35 @@ public class GameManager : MonoBehaviour {
 
     public void startGame()
     {
-
         gameIsRunning = true;
-        VectorField.instance.enabled = true;
         VectorField.instance.clearParticles();
         VectorField.instance.addParticle(HeroStone.getInstance().GetComponent<Rigidbody>());        
         currentScoreCanvas.gameObject.SetActive(true);
         startGameCanvas.gameObject.SetActive(false);
         AudioManager.instance.setIngame();
+        CameraMovement.instance.StartAutoMove();
     }
 
     public void endGame()
     {
-        VectorField.instance.enabled = false;
         gameIsRunning = false;
         gameEndCanvas.gameObject.SetActive(true);
         currentScoreCanvas.gameObject.SetActive(false);
         endTimeTextField.text = distanceTreveld.ToString("0.00") + "m";
         HeroStone.getInstance().enabled = false;
+        CameraMovement.instance.StopAutoMove();
 
         AudioManager.instance.setMenue();
     }
 
-    public void startLevel()    {
-               
+    public void startLevel(){
+
+        Application.LoadLevel(index: 1);
+        VectorField.instance.clearParticles();               
         startGameCanvas.gameObject.SetActive(true);
         gameEndCanvas.gameObject.SetActive(false);
         distanceTreveld = 0;
-        Application.LoadLevel(index: 1);
+        
     }
 
     public void quitGame()

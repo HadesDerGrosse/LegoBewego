@@ -34,8 +34,8 @@ public class Island : MonoBehaviour {
                 BoxCollider mc = logicHRC.GetChild(i).gameObject.AddComponent<BoxCollider>();
                 MeshRenderer mr = logicHRC.GetChild(i).gameObject.GetComponent<MeshRenderer>();
                 mr.enabled = false;
-                logicHRC.GetChild(i).localScale = new Vector3(1, 5, 1);
-                logicHRC.GetChild(i).localPosition = new Vector3(0, 0, -3);
+                logicHRC.GetChild(i).localScale += Vector3.up * 5;
+                logicHRC.GetChild(i).localPosition += Vector3.forward * -3;
 
             }
         }

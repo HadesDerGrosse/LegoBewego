@@ -73,25 +73,67 @@ public class WorldManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currentPos = Camera.main.transform.position.x;
+        float deletePos = Camera.main.transform.position.x - visibleDistance;
 
-        if (currentPos - borderPool.active[0].transform.position.x > visibleDistance)
+        if (borderPool.active[0].transform.position.x <deletePos)
         {
             addBorderTileToWorld();
             removeBorderTileFromWorld();            
         }
 
-        if (currentPos - islandPool.active[0].transform.position.x > visibleDistance)
+
+        for( int i =0; i < groupieTransform.childCount; i++)
         {
-            addIslandToWorld();
-            removeIslandFromWorld();
+            GameObject g = groupieTransform.GetChild(i).gameObject;
+            if (g.activeSelf && !g.GetComponent<StoneContainer>().crushed && g.transform.position.x < deletePos)
+            {
+                groupyPool.add(groupieTransform.GetChild(i).gameObject);
+            }
         }
 
-        
-        if(minePool.active.Count > 0 && currentPos -minePool.active[0].transform.position.x > visibleDistance)
+        /*
+        foreach (GameObject groupy in groupyPool.active)
         {
-            
-            minePool.add(minePool.active[0]);
+            if (groupy.transform.position.x < deletePos)
+            {
+                groupyPool.add(groupy);
+                break;
+            }
+        }*/
+
+        foreach (GameObject island in islandPool.active)
+        {
+            if (island.transform.position.x < deletePos)
+            {
+                islandPool.add(island);
+                break;
+            }
+        }
+
+        foreach (GameObject mine in minePool.active)
+        {
+            if(mine.transform.position.x < deletePos)
+            {
+                minePool.add(mine);
+                break;
+            }
+        }
+
+        if (Camera.main.transform.position.x > nextIslandPosition - visibleDistance)
+        {
+            addIslandToWorld();
+        }
+    }
+
+    private void clearPool(GameObjectPool pool, float deletePos)
+    {
+        foreach (GameObject go in pool.active)
+        {
+            if (go.transform.position.x < deletePos)
+            {
+                minePool.add(go);
+                break;
+            }
         }
     }
 
@@ -118,7 +160,7 @@ public class WorldManager : MonoBehaviour {
     {
         GameObject go = islandPool.get();
         Island island = go.GetComponent<Island>();
-        go.transform.position = new Vector3(Mathf.Max(nextIslandPosition + island.dimensions.x/2,visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
+        go.transform.position = new Vector3(Mathf.Max(nextIslandPosition + island.dimensions.x/2,visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-10 - island.dimensions.z) / 2, (levelHeight-10 - island.dimensions.z) / 2));
         go.transform.rotation = Quaternion.Euler(-90, UnityEngine.Random.Range(-islandAngle, islandAngle), 180);
         island.placeInteracts();
         nextIslandPosition += island.dimensions.x + UnityEngine.Random.Range(0,30) + minIslandDistance;
