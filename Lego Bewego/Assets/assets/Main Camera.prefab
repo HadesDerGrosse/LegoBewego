@@ -208,7 +208,7 @@ MonoBehaviour:
   arrow: {fileID: 114004332192562892}
   forceFactor: 1
   forceLength: 20
-  forceWidth: 10
+  forceWidth: 20
 --- !u!114 &114582842184771104
 MonoBehaviour:
   m_ObjectHideFlags: 1

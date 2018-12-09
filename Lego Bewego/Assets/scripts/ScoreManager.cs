@@ -5,25 +5,34 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
-    public Image[] score;
-
     public Sprite[] numbers;
 
-    // Use this for initialization
-    void Start()
-    {
+    private static Sprite[] numbersSprites;
 
+    public static ScoreManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            numbersSprites = numbers;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public static Sprite[] intToSpriteArray(int value)
     {
         string distance = GameManager.getInstance().distanceTreveld.ToString("0000000000");
         char[] numeralArray = distance.ToCharArray();
+        Sprite[] sprites = new Sprite[10];
 
         for (int i = 0; i < numeralArray.Length; i++)
         {
-            score[i].sprite = numbers[numeralArray[i] - '0'];
+            sprites[i] = numbersSprites[numeralArray[i] - '0'];
         }
+
+        return sprites;
     }
 }
+
+

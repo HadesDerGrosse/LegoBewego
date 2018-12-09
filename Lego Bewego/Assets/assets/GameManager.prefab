@@ -156,7 +156,6 @@ GameObject:
   - component: {fileID: 223567961204473354}
   - component: {fileID: 114110563326838524}
   - component: {fileID: 114859955357932632}
-  - component: {fileID: 114712300006616566}
   m_Layer: 5
   m_Name: CurrentScoreCanvas
   m_TagString: Untagged
@@ -232,6 +231,7 @@ GameObject:
   - component: {fileID: 114673480844050796}
   - component: {fileID: 82714049880242680}
   - component: {fileID: 82842615394571080}
+  - component: {fileID: 114019604792305966}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 223230149777397782}
   - component: {fileID: 114163021140679726}
   - component: {fileID: 114195004106039766}
+  - component: {fileID: 114371426197095326}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -353,6 +354,7 @@ GameObject:
   - component: {fileID: 224158773248905068}
   - component: {fileID: 222564931315168762}
   - component: {fileID: 114826690256301470}
+  - component: {fileID: 114200760639229530}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -886,6 +888,28 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114019604792305966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520846496277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff33ebe340d5e248b82c149748c4830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numbers:
+  - {fileID: 21300000, guid: e4368f3cd1e4d9f4ea64ff74adbc2fa3, type: 3}
+  - {fileID: 21300000, guid: cafcc034736ff18409c830ab727ace0b, type: 3}
+  - {fileID: 21300000, guid: d62dd22bde49a0b479f8a42589727064, type: 3}
+  - {fileID: 21300000, guid: 2c11598722be6ec49809fea24b15ffee, type: 3}
+  - {fileID: 21300000, guid: 060dc4b6cccc55d49bf8f08e741436f0, type: 3}
+  - {fileID: 21300000, guid: 53bfb24b6403a5f4f9d0ddbcb2de3cac, type: 3}
+  - {fileID: 21300000, guid: 21213d74be5c2b24bb45c67c34c578ae, type: 3}
+  - {fileID: 21300000, guid: 504646fa013fe4a489e2e627a516bebd, type: 3}
+  - {fileID: 21300000, guid: e58b91e3273fe83439ca6d4ddb17f586, type: 3}
+  - {fileID: 21300000, guid: 9591eb8e95fcdfc4a9b303e3769faee9, type: 3}
 --- !u!114 &114040394402206316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1112,6 +1136,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114200760639229530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899781391206560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727ad4546b4c6374cb78db887336ea66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - Start
+  - Begin
+  - "\u958B\u59CB"
 --- !u!114 &114201942105116880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1151,6 +1190,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugVectorField: 1
+--- !u!114 &114371426197095326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1543348451643716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3f4cd8822d0aa419b54281bb6f698f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 114717433035995372}
+  - {fileID: 114937424340003292}
+  - {fileID: 114519115335032998}
+  - {fileID: 114201942105116880}
+  - {fileID: 114518886575436082}
+  - {fileID: 114536103123302678}
+  - {fileID: 114866718003156708}
+  - {fileID: 114852500434439624}
+  - {fileID: 114985868241950660}
+  - {fileID: 114489116446838366}
 --- !u!114 &114425904080582886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1383,39 +1444,6 @@ MonoBehaviour:
   death: {fileID: 0}
   click: {fileID: 82842615394571080}
   groupy: {fileID: 82714049880242680}
---- !u!114 &114712300006616566
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1349098580080370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dff33ebe340d5e248b82c149748c4830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score:
-  - {fileID: 114717433035995372}
-  - {fileID: 114937424340003292}
-  - {fileID: 114519115335032998}
-  - {fileID: 114201942105116880}
-  - {fileID: 114518886575436082}
-  - {fileID: 114536103123302678}
-  - {fileID: 114866718003156708}
-  - {fileID: 114852500434439624}
-  - {fileID: 114985868241950660}
-  - {fileID: 114489116446838366}
-  numbers:
-  - {fileID: 21300000, guid: e4368f3cd1e4d9f4ea64ff74adbc2fa3, type: 3}
-  - {fileID: 21300000, guid: cafcc034736ff18409c830ab727ace0b, type: 3}
-  - {fileID: 21300000, guid: d62dd22bde49a0b479f8a42589727064, type: 3}
-  - {fileID: 21300000, guid: 2c11598722be6ec49809fea24b15ffee, type: 3}
-  - {fileID: 21300000, guid: 060dc4b6cccc55d49bf8f08e741436f0, type: 3}
-  - {fileID: 21300000, guid: 53bfb24b6403a5f4f9d0ddbcb2de3cac, type: 3}
-  - {fileID: 21300000, guid: 21213d74be5c2b24bb45c67c34c578ae, type: 3}
-  - {fileID: 21300000, guid: 504646fa013fe4a489e2e627a516bebd, type: 3}
-  - {fileID: 21300000, guid: e58b91e3273fe83439ca6d4ddb17f586, type: 3}
-  - {fileID: 21300000, guid: 9591eb8e95fcdfc4a9b303e3769faee9, type: 3}
 --- !u!114 &114717340390235862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1431,9 +1459,9 @@ MonoBehaviour:
   currentScoreCanvas: {fileID: 223567961204473354}
   gameEndCanvas: {fileID: 223192930593103186}
   startGameCanvas: {fileID: 223538789527079362}
-  endTimeTextField: {fileID: 114130960347119090}
-  currentScoreTextField: {fileID: 0}
+  currentScoreHandler: {fileID: 114371426197095326}
   damageMultiply: 1
+  highscore: 000000000000000000000000
 --- !u!114 &114717433035995372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1871,7 +1899,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1952442634600994}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
