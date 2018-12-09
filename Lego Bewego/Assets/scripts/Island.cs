@@ -16,10 +16,7 @@ public class Island : MonoBehaviour {
     {
         Transform logicHRC = transform.GetChild(0);
         for (int i = 0; i < logicHRC.childCount; i++)
-        {
-            Debug.Log(logicHRC.GetChild(i));
-
-            
+        {            
             if (logicHRC.GetChild(i).name.Contains("_mine_"))
                 minePositions.Add(logicHRC.GetChild(i));
 

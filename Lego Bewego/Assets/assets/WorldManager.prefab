@@ -51,15 +51,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0fc2d7283f80742a4b2ad9d822226b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mines:
+  - {fileID: 1337649341543842, guid: d6dff56967b64a74da1c960614e0e132, type: 2}
+  - {fileID: 1099308225838148, guid: 2d2eb83e22df3bf4fb82b0dfc3aa06f9, type: 2}
+  - {fileID: 1295130351737364, guid: d2d2c744672de6f4fa76b2d9c32f1f31, type: 2}
   islandTiles:
   - {fileID: 1567074174886152, guid: a4c16887a1760074cb91d4835afe13a1, type: 2}
   - {fileID: 1754377324097722, guid: 8a1f0e345d418d84d81ba67b666111f5, type: 2}
   - {fileID: 1764105493528296, guid: f3949f6c9eca2c446a33406039cdf273, type: 2}
+  - {fileID: 1526239196278142, guid: 92bde67ca29086d438695ae91935176f, type: 2}
+  - {fileID: 1216901335925232, guid: cfd267c9ba7187f4ab397f23bc87623b, type: 2}
+  - {fileID: 1088206961979962, guid: f9fa780640262bb46b1b617af895ded7, type: 2}
+  - {fileID: 1250206408397562, guid: 105572c44e64afa419a2ccb1f230a87b, type: 2}
+  - {fileID: 1601683532126170, guid: d2a8aef082296f04caf35c250d654f17, type: 2}
+  - {fileID: 1175814476182522, guid: 1bdd54d2cc4c68944b0576b5b75abb64, type: 2}
   currentIslandTiles: []
   borderTiles:
   - {fileID: 1436200323842890, guid: b36213bc51f524d4b96ea8e797241b97, type: 2}
   - {fileID: 1932950541266670, guid: 3cc8f30cac6404a4ca2b07a48d12542e, type: 2}
-  levelHeight: 25
+  levelHeight: 55
   islandAngle: 20
   tileHight: 18
-  visibleDistance: 50
+  visibleDistance: 70

@@ -20,9 +20,10 @@ public class WorldManager : MonoBehaviour {
     public int levelHeight = 50;
     public float islandAngle = 20;
     private int lastBorderTilePos = 0;
-    private int lastIslandTilePos = 0;
+    private float nextIslandPosition = 0;
     public int tileHight = 10;
     public int visibleDistance = 2;
+    public int minIslandDistance = 10;
 
     private float currentPos;
 
@@ -47,7 +48,7 @@ public class WorldManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lastBorderTilePos = -visibleDistance;
-        lastIslandTilePos = visibleDistance;
+        nextIslandPosition = visibleDistance;
 
         while (lastBorderTilePos < visibleDistance)
         {
@@ -108,10 +109,11 @@ public class WorldManager : MonoBehaviour {
     {
         GameObject go = islandPool.get();
         Island island = go.GetComponent<Island>();
-        go.transform.position = new Vector3(UnityEngine.Random.Range(lastIslandTilePos, lastIslandTilePos + visibleDistance), 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
+        go.transform.position = new Vector3(nextIslandPosition + island.dimensions.x/2, 0, UnityEngine.Random.Range(-(levelHeight-20 - island.dimensions.z) / 2, (levelHeight-20 - island.dimensions.z) / 2));
         go.transform.rotation = Quaternion.Euler(-90, UnityEngine.Random.Range(-islandAngle, islandAngle), 180);
         currentIslandTiles.Add(go);
-        lastIslandTilePos += visibleDistance;
+        island.placeMines();
+        nextIslandPosition += island.dimensions.x + UnityEngine.Random.Range(0,30) + minIslandDistance;
 
     }
 
