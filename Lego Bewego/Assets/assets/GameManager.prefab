@@ -875,6 +875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a0d579e4b6f34eb0372e91c13e788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGame: {fileID: 82977301525859672}
+  menue: {fileID: 82064447056954970}
 --- !u!114 &114717340390235862
 MonoBehaviour:
   m_ObjectHideFlags: 1
