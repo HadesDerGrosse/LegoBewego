@@ -15,6 +15,9 @@ public class VectorField : MonoBehaviour {
 
     public float maxForce = 15;
 
+    public bool visualizeVectors = true;
+
+    public Material lineMat;
 
     private VectorfieldFraction[,] vectorfield;
     // store the current extents of the vectorfield
@@ -37,6 +40,8 @@ public class VectorField : MonoBehaviour {
 
     private HeroStone hero;
 
+    private LineRenderer lineRenderer;
+
 
 
     void Awake()
@@ -50,6 +55,8 @@ public class VectorField : MonoBehaviour {
     void Start () {
 
         hero = HeroStone.getInstance();
+
+        lineRenderer = GetComponent<LineRenderer>();
 
         ground = new Plane(Vector3.up, Vector3.zero);
         corners = new Vector3[4];
@@ -186,6 +193,7 @@ public class VectorField : MonoBehaviour {
     // DEBUG
     void OnDrawGizmos()
     {
+        //DrawLines();
         if (Application.isPlaying && DebugManager.instance.debugVectorField)
         {
             //draw screen edge points
@@ -215,6 +223,40 @@ public class VectorField : MonoBehaviour {
         }
     }
 
+
+
+    public void DrawLines()
+    {
+        if (visualizeVectors)
+        {
+            for (int i = 0; i < vfX; i++)
+            {
+                for (int j = 0; j < vfY; j++)
+                {
+                    if (vectorfield[i, j].vel.magnitude > 1)
+                    {
+                        Vector2 shift = new Vector2(
+                                Mathf.Floor((vfX + vectorfieldOffset.x - i) / vfX),
+                                Mathf.Floor((vfY + vectorfieldOffset.y - j) / vfY));
+
+                        Vector3 start = new Vector3(
+                            i + shift.x * vfX + vectorfieldOrigin.x,
+                            0,
+                            j + shift.y * vfY + vectorfieldOrigin.y);
+
+                        Vector3 end = start + Vec2ToVec3(vectorfield[i, j].vel);
+
+                        GL.Begin(GL.LINES);
+                        lineMat.SetPass(0);
+                        GL.Color(new Color(lineMat.color.r, lineMat.color.g, lineMat.color.b, lineMat.color.a));
+                        GL.Vertex3(start.x, start.y, start.z);
+                        GL.Vertex3(end.x, end.y, end.z);
+                        GL.End();
+                    }
+                }
+            }
+        }
+    }
 
 
 

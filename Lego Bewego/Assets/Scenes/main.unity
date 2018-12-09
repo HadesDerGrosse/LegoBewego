@@ -264,11 +264,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224558470583435700, guid: 68ddbbd4e455d61409f28217002f7c1c,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224558470583435700, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -356,66 +351,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_FontData.m_Alignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782098073653698, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.4862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319718988841406, guid: 68ddbbd4e455d61409f28217002f7c1c,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.6509804
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ddbbd4e455d61409f28217002f7c1c, type: 2}
