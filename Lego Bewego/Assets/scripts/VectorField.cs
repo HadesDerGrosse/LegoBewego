@@ -10,6 +10,9 @@ public class VectorField : MonoBehaviour {
 
     public float forceFactor = 10;
 
+    public float heroAttractionForce = 10;
+    public float heroAttractionDist = 30;
+
 
     private VectorfieldFraction[,] vectorfield;
     // store the current extents of the vectorfield
@@ -30,6 +33,8 @@ public class VectorField : MonoBehaviour {
     private Vector3[] corners;
     private Bounds cornerBounds;
 
+    private HeroStone hero;
+
 
 
     void Awake()
@@ -41,7 +46,9 @@ public class VectorField : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+
+        hero = HeroStone.getInstance();
+
         ground = new Plane(Vector3.up, Vector3.zero);
         corners = new Vector3[4];
         vectorfieldOffset = new Vector2(0,0);
@@ -148,8 +155,8 @@ public class VectorField : MonoBehaviour {
                 vx += (vectorfield[WrapIndex(i - 1, vfX), j].pressure - vectorfield[WrapIndex(i + 1, vfX), j].pressure) * 0.5f;
                 vy += (vectorfield[i, WrapIndex(j - 1, vfY)].pressure - vectorfield[i, WrapIndex(j + 1, vfY)].pressure) * 0.5f;
 
-                vx *= Mathf.Lerp(1, 0.1f, Time.deltaTime / 1.0f);
-                vy *= Mathf.Lerp(1, 0.1f, Time.deltaTime / 1.0f);
+                vx *= 0.95f;
+                vy *= 0.95f;
                 frac.vel.Set(vx, vy);
 
             }
@@ -160,6 +167,22 @@ public class VectorField : MonoBehaviour {
         foreach(Rigidbody particle in particles)
         {
             particle.AddForce(forceFactor * getForce(particle.GetComponent<Transform>().position));
+            if (particle.gameObject != hero)
+            {
+                Vector3 forceVector = (hero.transform.position - particle.transform.position);
+
+                if (forceVector.magnitude < heroAttractionDist)
+                {
+                    particle.GetComponent<Rigidbody>().AddForce(
+                        forceVector.normalized * 
+                        heroAttractionForce
+                        );
+                    particle.GetComponent<Rigidbody>().AddForce( 
+                       - forceVector.normalized * 
+                       (heroAttractionForce * 2f * (Mathf.Lerp(1,0,forceVector.magnitude/heroAttractionDist)))
+                       );
+                }
+            }
         }
 
 
