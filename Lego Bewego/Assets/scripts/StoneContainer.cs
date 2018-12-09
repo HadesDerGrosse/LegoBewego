@@ -10,6 +10,10 @@ public class StoneContainer : MonoBehaviour {
     public float damageMulti = 1.0f;
     public List<Transform> children;
     public List<Vector3> startPositions;
+    public float resetTime = 10;
+
+    private float crushTime = 0;
+    public bool crushed = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,17 +29,13 @@ public class StoneContainer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        foreach(Transform t in children)
+        if (crushed)
         {
-            if(t.position.x > Camera.main.transform.position.x - WorldManager.getInstance().visibleDistance)
+            if(crushTime+ resetTime< Time.time)
             {
-                return;
+                reset();
             }
         }
-
-        reset();
-
-
 	}
 
     void OnCollisionEnter(Collision collision)
@@ -62,13 +62,15 @@ public class StoneContainer : MonoBehaviour {
             children[i].localRotation = Quaternion.identity;
             Destroy(rig);
         }
-
-        WorldManager.getInstance().groupyPool.add(this.gameObject);
-
+        
+        currentHealth = startHealth;
+        crushed = false;
     }
 
     public void crush(Vector3 position, float force)
     {
+        crushed = true;
+        crushTime = Time.time;
         foreach(Transform child in children)
         {
             if(child.GetComponent<Rigidbody>() == null)
@@ -79,7 +81,6 @@ public class StoneContainer : MonoBehaviour {
                 rig.gameObject.tag = "stone";
                 rig.AddExplosionForce(force * 20, position, force*2);
                 VectorField.instance.addParticle(rig);
-                //child.parent = this.transform.parent;
             }            
         }
     }
