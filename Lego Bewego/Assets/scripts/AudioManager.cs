@@ -48,4 +48,9 @@ public class AudioManager : MonoBehaviour {
     {
         groupy.Play();
     }
+
+    public void playClick()
+    {
+        click.Play();
+    }
 }
